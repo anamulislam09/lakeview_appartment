@@ -36,8 +36,8 @@ return new class extends Migration
             $table->string('garage_no')->nullable();
             $table->string('occupation')->nullable();
             $table->string('institute_name')->nullable();
+            $table->string('designation')->nullable();
             $table->string('institute_addres')->nullable();
-            $table->string('location')->nullable();
             $table->enum('status',[1, 0])->default(1);
             $table->string('created_date');
             $table->string('created_by');

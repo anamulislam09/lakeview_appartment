@@ -43,12 +43,24 @@
                                         <form action="{{ route('building.store') }}" method="POST">
                                             @csrf
                                             <div class="row">
-                                                <div class="col-10">
+                                                <div class="col-12">
                                                     <div class="form-group">
                                                         <label for="building_name" class="form-label">Building Name</label>
                                                         <input type="text" class="form-control"
                                                             value="{{ old('building_name') }}" name="building_name"
                                                             placeholder="Enter Building Name" required>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="building_location" class="form-label">Building Location</label>
+                                                        <input type="text" class="form-control"
+                                                            value="{{ old('building_location') }}" name="building_location"
+                                                            placeholder="Enter Building location" required>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="building_floor" class="form-label">Building Floor</label>
+                                                        <input type="text" class="form-control"
+                                                            value="{{ old('building_floor') }}" name="building_floor"
+                                                            placeholder="Enter Building floor" required>
                                                     </div>
                                                 </div>
                                             </div>

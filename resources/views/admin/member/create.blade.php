@@ -68,9 +68,10 @@
             }
         }
 
-        input{
+        input {
             background: #fff;
         }
+
         .text {
             font-size: 14px !important;
         }
@@ -117,21 +118,24 @@
                                                 <div class="col-lg-4 col-md-4 col-sm-6">
                                                     <div class="form-group text form">
                                                         <label for="" class="text">Member Name </label>
-                                                        <input type="text" name="member_name" value="{{old('member_name')}}" class="form-control text"
+                                                        <input type="text" name="member_name"
+                                                            value="{{ old('member_name') }}" class="form-control text"
                                                             placeholder="Member name" required>
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-4 col-md-4 col-sm-6">
                                                     <div class="form-group text form">
                                                         <label for="" class="text">Guardian Name </label>
-                                                        <input type="text" name="guardian_name" value="{{old('guardian_name')}}" class="form-control text"
+                                                        <input type="text" name="guardian_name"
+                                                            value="{{ old('guardian_name') }}" class="form-control text"
                                                             placeholder="Enter guardian name" required>
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-4 col-md-4 col-sm-6">
                                                     <div class="form-group text form">
                                                         <label for="" class="text">Mother Name</label>
-                                                            <input type="text" name="mother_name" value="{{old('mother_name')}}" class="form-control text"
+                                                        <input type="text" name="mother_name"
+                                                            value="{{ old('mother_name') }}" class="form-control text"
                                                             placeholder="Enter mother name" required>
                                                     </div>
                                                 </div>
@@ -140,26 +144,28 @@
                                                 <div class="col-lg-4 col-md-4 col-sm-6">
                                                     <div class="form-group text form">
                                                         <label for="" class="text">Permanent Address </label>
-                                                        <input type="text"
-                                                            name="permanent_address" value="{{old('permanent_address')}}" class="form-control text"
+                                                        <input type="text" name="permanent_address"
+                                                            value="{{ old('permanent_address') }}" class="form-control text"
                                                             placeholder="Enter permanent address" required>
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-4 col-md-4 col-sm-6">
                                                     <div class="form-group text form">
                                                         <label for="" class="text">Nationality</label>
-                                                            <select name="nationality" id="" class="form-control" required>
-                                                                <option value="Bangladeshi">Bangladeshi</option>
-                                                                <option value="Indian">Indian</option>
-                                                                <option value="Pakistani">Pakistani</option>
-                                                            </select>
+                                                        <select name="nationality" id="" class="form-control"
+                                                            required>
+                                                            <option value="Bangladeshi">Bangladeshi</option>
+                                                            <option value="Indian">Indian</option>
+                                                            <option value="Pakistani">Pakistani</option>
+                                                        </select>
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-4 col-md-4 col-sm-6">
                                                     <div class="form-group text form">
                                                         <label for="" class="text">Religion </label>
-                                                        <input type="text" name="religion" value="{{old('religion')}}" class="form-control text"
-                                                            placeholder="Enter permanent address" required>
+                                                        <input type="text" name="religion" value="{{ old('religion') }}"
+                                                            class="form-control text" placeholder="Enter permanent address"
+                                                            required>
                                                     </div>
                                                 </div>
                                             </div>
@@ -167,7 +173,8 @@
                                                 <div class="col-lg-4 col-md-4 col-sm-6">
                                                     <div class="form-group form">
                                                         <label for="" class="text">Date of Dirth</label>
-                                                        <input type="date" value="{{old('date_of_birth')}}" name="date_of_birth" class="form-control text"
+                                                        <input type="date" value="{{ old('date_of_birth') }}"
+                                                            name="date_of_birth" class="form-control text"
                                                             placeholder="Enter date_of_birth" required>
                                                     </div>
                                                 </div>
@@ -188,7 +195,8 @@
                                                 <div class="col-lg-4 col-md-4 col-sm-6">
                                                     <div class="form-group text form">
                                                         <label for="" class="text">Intercome No</label>
-                                                            <input type="text" name="intercome_no" value="{{old('intercome_no')}}" class="form-control text"
+                                                        <input type="text" name="intercome_no"
+                                                            value="{{ old('intercome_no') }}" class="form-control text"
                                                             placeholder="Enter intercome_no">
                                                     </div>
                                                 </div>
@@ -197,29 +205,33 @@
                                                 <div class="col-lg-3 col-md-3 col-sm-6">
                                                     <div class="form-group text form">
                                                         <label for="" class="text">land_phone </label>
-                                                        <input type="text" name="land_phone" value="{{old('land_phone')}}" class="form-control text"
+                                                        <input type="text" name="land_phone"
+                                                            value="{{ old('land_phone') }}" class="form-control text"
                                                             placeholder="Land Phone">
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-3 col-md-3 col-sm-6">
                                                     <div class="form-group text form">
                                                         <label for="" class="text">Mobile_phone</label>
-                                                        <input type="text"name="mobile_phone" value="{{old('mobile_phone')}}" class="form-control text"
+                                                        <input type="text"name="mobile_phone"
+                                                            value="{{ old('mobile_phone') }}" class="form-control text"
                                                             placeholder="Valid Phone number" required>
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-3 col-md-3 col-sm-6">
                                                     <div class="form-group text form">
                                                         <label for="" class="text">Email </label>
-                                                        <input type="text" name="email" value="{{old('email')}}" class="form-control text"
-                                                            placeholder="Enter valid email" required>
+                                                        <input type="text" name="email" value="{{ old('email') }}"
+                                                            class="form-control text" placeholder="Enter valid email"
+                                                            required>
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-3 col-md-3 col-sm-6">
                                                     <div class="form-group text form">
                                                         <label for="" class="text">NID/NRC </label>
-                                                        <input type="text" name="nid_no" value="{{old('nid_no')}}" class="form-control text"
-                                                            placeholder="Enter NID number" required>
+                                                        <input type="text" name="nid_no" value="{{ old('nid_no') }}"
+                                                            class="form-control text" placeholder="Enter NID number"
+                                                            required>
                                                     </div>
                                                 </div>
 
@@ -228,21 +240,23 @@
                                                 <div class="col-lg-4 col-md-4 col-sm-6">
                                                     <div class="form-group text form">
                                                         <label for="" class="text">Car no</label>
-                                                        <input type="text" name="car_no" value="{{old('car_no')}}" class="form-control text"
-                                                            placeholder="Enter car_no">
+                                                        <input type="text" name="car_no" value="{{ old('car_no') }}"
+                                                            class="form-control text" placeholder="Enter car_no">
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-4 col-md-4 col-sm-6">
                                                     <div class="form-group text form">
                                                         <label for="" class="text">Garage no</label>
-                                                        <input type="text" name="garage_no" value="{{old('garage_no')}}" class="form-control text"
+                                                        <input type="text" name="garage_no"
+                                                            value="{{ old('garage_no') }}" class="form-control text"
                                                             placeholder="Enter garage_no">
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-4 col-md-4 col-sm-6">
                                                     <div class="form-group form">
                                                         <label for="" class="text">Occupation</label>
-                                                        <input type="text" name="occupation" value="{{old('occupation')}}" class="form-control text"
+                                                        <input type="text" name="occupation"
+                                                            value="{{ old('occupation') }}" class="form-control text"
                                                             placeholder="Enter occupation">
                                                     </div>
                                                 </div>
@@ -251,44 +265,46 @@
                                                 <div class="col-lg-4 col-md-4 col-sm-6">
                                                     <div class="form-group text form">
                                                         <label for="" class="text">Designation</label>
-                                                        <input type="text" name="designation" value="{{old('designation')}}" class="form-control text"
+                                                        <input type="text" name="designation"
+                                                            value="{{ old('designation') }}" class="form-control text"
                                                             placeholder="Enter designation">
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-4 col-md-4 col-sm-6">
                                                     <div class="form-group text form">
                                                         <label for="" class="text">Institute Name</label>
-                                                        <input type="text"
-                                                            name="institute_name" value="{{old('institute_name')}}" class="form-control text"
+                                                        <input type="text" name="institute_name"
+                                                            value="{{ old('institute_name') }}" class="form-control text"
                                                             placeholder="Enter institute name">
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-4 col-md-4 col-sm-6">
                                                     <div class="form-group form">
                                                         <label for="" class="text">Institute Addres</label>
-                                                        <input type="text"
-                                                            name="institute_addres" value="{{old('institute_addres')}}" class="form-control text"
+                                                        <input type="text" name="institute_addres"
+                                                            value="{{ old('institute_addres') }}"
+                                                            class="form-control text"
                                                             placeholder="Enter institute addres">
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="row">
-                                               
                                                 <div class="col-lg-4 col-md-4 col-sm-6">
                                                     <div class="form-group text">
-                                                        <label for="nid" class="text">NID/NRC <span style="font-size:12px; color:#fb5200;">(Image)</span></label>
-                                                        <input type="file" name="nid" value="{{old('nid')}}" class="form-control dropify"
+                                                        <label for="nid" class="text">NID/NRC <span
+                                                                style="font-size:12px; color:#fb5200;">(Image)</span></label>
+                                                        <input type="file" name="nid" class="form-control dropify"
                                                             data-height="100">
                                                         @error('nid')
                                                             <span class="text-danger">{{ $message }}</span>
                                                         @enderror
                                                     </div>
                                                 </div>
-                                          
+
                                                 <div class="col-lg-4 col-md-4 col-sm-6">
                                                     <div class="form-group text">
                                                         <label for="image" class="text">Member Image</label>
-                                                        <input type="file" name="image" value="{{old('image')}}" class="form-control dropify"
+                                                        <input type="file" name="image" class="form-control dropify"
                                                             data-height="100">
                                                         @error('image')
                                                             <span class="text-danger">{{ $message }}</span>
@@ -300,7 +316,7 @@
                                                         <label for="flat_reg_document" class="text">Flat Reg
                                                             Document</label>
                                                         <input type="file" name="flat_reg_document"
-                                                            class="form-control dropify" value="{{old('flat_reg_document')}}" data-height="100">
+                                                            class="form-control dropify" data-height="100">
                                                         @error('flat_reg_document')
                                                             <span class="text-danger">{{ $message }}</span>
                                                         @enderror

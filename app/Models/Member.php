@@ -32,7 +32,6 @@ class Member extends Model
         'occupation',
         'institute_name',
         'institute_addres',
-        'location',
         'status',
         'created_date',
         'created_by',

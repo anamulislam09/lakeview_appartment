@@ -145,7 +145,7 @@
                         </a>
                         <ul class="nav nav-treeview">
                             @if (Auth::guard('admin')->user()->type == 'superadmin' ||
-                                    in_array('member', $privileges))
+                                    in_array('Members', $privileges))
                                 <li class="nav-item">
                                     <a href="{{ route('member.index') }}"
                                         class="nav-link {{ Request::routeIs('member.index') || Request::routeIs('member.edit') ? 'active' : '' }}">

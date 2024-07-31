@@ -13,7 +13,13 @@ class MemberController extends Controller
     public function index()
     {
         $data = Member::orderBy('id', 'desc')->get();
-        return view('admin.buildings.index', compact('data'));
+        return view('admin.member.index', compact('data'));
+    }
+
+    public function show($id)
+    {
+        $data = Member::where('id', $id)->first();
+        return view('admin.member.show', compact('data'));
     }
 
     public function create() 
@@ -51,9 +57,9 @@ class MemberController extends Controller
                 'mobile_phone' => 'required|string|max:20',
                 'email' => 'required|email|max:255',
                 'nid_no' => 'required|string|max:255',
-                // 'nid' => 'required|mimes:jpg,jpeg,png,pdf|max:2048',
-                // 'image' => 'nullable|mimes:jpg,jpeg,png,pdf|max:2048',
-                // 'flat_reg_document' => 'nullable|mimes:jpg,jpeg,png,pdf|max:2048',
+                'nid' => 'required|mimes:jpg,jpeg,png,pdf|max:2048',
+                'image' => 'nullable|mimes:jpg,jpeg,png,pdf|max:2048',
+                'flat_reg_document' => 'nullable|mimes:jpg,jpeg,png,pdf|max:2048',
                 'car_no' => 'required|string|max:50',
                 'garage_no' => 'required|string|max:50',
                 'occupation' => 'nullable|string|max:255',
@@ -68,6 +74,7 @@ class MemberController extends Controller
             $data['building_id'] = $building->id;
             $data['member_name'] = $request->member_name;
             $data['guardian_name'] = $request->guardian_name;
+            $data['mother_name'] = $request->mother_name;
             $data['permanent_address'] = $request->permanent_address;
             $data['nationality'] = $request->nationality;
             $data['religion'] = $request->religion;
@@ -108,8 +115,9 @@ class MemberController extends Controller
             // Combine validated data and file upload data
             // $memberData = array_merge($validatedData, $data);
     
-            // Store member data
+            // // Store member data
             // Member::create($memberData);
+            dd($data);
             Member::create($data);
     
             // Redirect back with success message or any custom response

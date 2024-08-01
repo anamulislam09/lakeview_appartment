@@ -59,6 +59,9 @@ Route::prefix('admin')->namespace('App\Http\Controllers\admin')->group(function 
         Route::post('/appartment/update', [AppartmentController::class, 'update'])->name('appartment.update');
         Route::get('/appartment/delete/{id}', [AppartmentController::class, 'destroy'])->name('appartment.destroy');
 
+        // Route::get('/get-floor/{building_id}', [AppartmentController::class, 'getFloor']);  // get appartment using ajax
+        Route::get('/get-floors/{buildingId}', [AppartmentController::class, 'getFloor']);
+
         //------------members route ------------>
         Route::get('/member/all', [MemberController::class, 'index'])->name('member.index');
         Route::get('/member/create', [MemberController::class, 'create'])->name('member.create');

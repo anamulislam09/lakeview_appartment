@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('appartment_name');
             $table->string('location')->nullable();
             $table->enum('status',[1, 0])->default(1);
+            $table->string('booking_status')->default(0);
             $table->string('created_date');
             $table->string('created_by');
             $table->timestamps();

@@ -50,6 +50,8 @@
                                             <tr>
                                                 <th>SL</th>
                                                 <th>Building Name</th>
+                                                <th>Location</th>
+                                                <th>No of Floor</th>
                                                 <th>Status</th>
                                                 <th> Action</th>
                                             </tr>
@@ -59,6 +61,8 @@
                                                 <tr>
                                                     <td>{{ $key + 1 }}</td>
                                                     <td>{{ $item->building_name }}</td>
+                                                    <td>{{ $item->building_location }}</td>
+                                                    <td>{{ $item->building_floor }}</td>
                                                     <th>
                                                         @if ($item->status == 1)
                                                             <span class="badge badge-success">Active</span>

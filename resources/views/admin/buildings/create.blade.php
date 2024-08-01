@@ -48,19 +48,19 @@
                                                         <label for="building_name" class="form-label">Building Name</label>
                                                         <input type="text" class="form-control"
                                                             value="{{ old('building_name') }}" name="building_name"
-                                                            placeholder="Enter Building Name" required>
+                                                            placeholder="Enter building name" required>
                                                     </div>
                                                     <div class="form-group">
                                                         <label for="building_location" class="form-label">Building Location</label>
                                                         <input type="text" class="form-control"
                                                             value="{{ old('building_location') }}" name="building_location"
-                                                            placeholder="Enter Building location" required>
+                                                            placeholder="Enter building location" required>
                                                     </div>
                                                     <div class="form-group">
                                                         <label for="building_floor" class="form-label">Building Floor</label>
                                                         <input type="text" class="form-control"
                                                             value="{{ old('building_floor') }}" name="building_floor"
-                                                            placeholder="Enter Building floor" required>
+                                                            placeholder="Enter building floor" required>
                                                     </div>
                                                 </div>
                                             </div>

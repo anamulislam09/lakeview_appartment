@@ -11,6 +11,16 @@
                             name="building_name" required>
                     </div>
                     <div class="form-group">
+                        <label for="building_location" class="form-label">Building Location</label>
+                        <input type="text" class="form-control" value="{{ $data->building_location }}"
+                            name="building_location" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="building_floor" class="form-label">Building Floor</label>
+                        <input type="text" class="form-control" value="{{ $data->building_floor }}"
+                            name="building_floor" readonly>
+                    </div>
+                    <div class="form-group">
                         <label for="" class="form-label">Status</label>
                         <select name="status" class="form-control" id="">
                             <option value="1" @if ($data->status == 1) selected @endif>Active</option>

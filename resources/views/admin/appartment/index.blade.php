@@ -6,13 +6,24 @@
             .card-title a {
                 font-size: 15px;
             }
+
             table,
             thead,
             tbody,
             tr,
             td {
                 font-size: 14px;
+                padding: 10px !important;
             }
+        }
+
+        table,
+        thead,
+        tbody,
+        tr,
+        td {
+            font-size: 15px;
+            padding: 10px !important;
         }
     </style>
 
@@ -45,12 +56,13 @@
                             <!-- /.card-header -->
                             <div class="card-body">
                                 <div class="table-responsive">
-                                    <table id="" class="table table-bordered table-striped">
+                                    <table id="example1" class="table table-bordered table-striped">
                                         <thead>
                                             <tr>
                                                 <th>SL</th>
-                                                <th>Appartment Name</th>
                                                 <th>Building Name</th>
+                                                <th>Floor No</th>
+                                                <th>Appartment Name</th>
                                                 <th>Created By</th>
                                                 <th>Status</th>
                                                 <th> Action</th>
@@ -58,14 +70,22 @@
                                         </thead>
                                         <tbody>
                                             @foreach ($data as $key => $item)
-                                            @php
-                                                $auth_name = App\Models\Admin::where('id', $item->created_by)->value('name');
-                                            @endphp
+                                                @php
+                                                    $auth_name = App\Models\Admin::where(
+                                                        'id',
+                                                        $item->created_by,
+                                                    )->value('name');
+                                                    $building_floor = App\Models\Floor::where(
+                                                        'id',
+                                                        $item->floor_id,
+                                                    )->value('building_floor');
+                                                @endphp
                                                 <tr>
                                                     <td>{{ $key + 1 }}</td>
-                                                    <td>{{ $item->appartment_name }}</td>
                                                     <td>{{ $item->building_name }}</td>
-                                                    <td>{{$auth_name}}</td>
+                                                    <td>Floor {{ $building_floor }}</td>
+                                                    <td>{{ $item->appartment_name }}</td>
+                                                    <td>{{ $auth_name }}</td>
                                                     <th>
                                                         @if ($item->status == 1)
                                                             <span class="badge badge-success">Active</span>
@@ -74,7 +94,9 @@
                                                         @endif
                                                     </th>
                                                     <td>
-                                                        <a href="" class="btn btn-sm btn-info edit" data-id="{{$item->id}}" data-toggle="modal" data-target="#editUser"><i class="fas fa-edit"></i></a>
+                                                        <a href="" class="btn btn-sm btn-info edit"
+                                                            data-id="{{ $item->id }}" data-toggle="modal"
+                                                            data-target="#editUser"><i class="fas fa-edit"></i></a>
                                                         <a href="{{ route('appartment.destroy', $item->id) }}"
                                                             class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></a>
                                                     </td>

@@ -7,6 +7,7 @@ use App\Models\Building;
 use App\Models\Floor;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 
 
 class AppartmentController extends Controller
@@ -30,66 +31,90 @@ class AppartmentController extends Controller
 
     public function getFloor($buildingId)
     {
-        // dd("hello");
         $floors = Floor::where('building_id', $buildingId)->get();
-        // dd($floors);
         return response()->json($floors);
     }
 
     // public function store(Request $request)
     // {
-    //     $data['building_id'] = $request->building_id;
-    //     $data['appartment_name'] = $request->appartment_name;
-    //     $data['location'] = $request->location;
-    //     $data['created_date'] = date('Y-m-d');
-    //     $data['created_by'] = Auth::guard('admin')->user()->id;
-    //     Appartment::create($data);
-    //     return redirect()->route('appartment.index')->with('alert', ['messageType' => 'success', 'message' => 'Appartment Added Successfully!']);
+    //     // Log the request data
+    //     Log::info('Request Data:', $request->all());
+
+    //     // Retrieve the validated input data
+    //     $buildingId = $request->input('building_id');
+    //     $floorIds = $request->input('floor_id', []);
+    //     $appartmentNames = $request->input('appartment_name', []);
+
+    //     // Log the retrieved data
+    //     Log::info('Building ID:', [$buildingId]);
+    //     Log::info('Floor IDs:', $floorIds);
+    //     Log::info('Appartment Names:', $appartmentNames);
+
+    //     // Ensure that the arrays are not empty
+    //     if (!is_array($floorIds) || !is_array($appartmentNames)) {
+    //         return redirect()->back()->withErrors(['msg' => 'Invalid input data. Please try again.']);
+    //     }
+
+    //     // Iterate through the arrays and save the data
+    //     foreach ($floorIds as $index => $floorId) {
+    //         $appartment = new Appartment();
+    //         $appartment->building_id = $buildingId;
+    //         $appartment->floor_id = $floorId;
+    //         $appartment->appartment_name = $appartmentNames[$index];
+    //         $appartment->created_date = date('Y-m-d');
+    //         $appartment->created_by = Auth::guard('admin')->user()->id;
+
+    //         // Log the appartment data before saving
+    //         Log::info('Appartment Data:', $appartment->toArray());
+
+    //         $appartment->save();
+    //     }
+
+    //     return redirect()->route('appartment.index')->with('success', 'Appartments added successfully.');
     // }
 
+    public function store(Request $request)
+    {
+        // Log the request data
+        Log::info('Request Data:', $request->all());
 
-  // store all data 
-  
- 
-      public function store(Request $request)
-      {
-          // Validate the request
-        //   $request->validate([
-        //       'building_id' => 'required|exists:buildings,id',
-        //       'floor_id' => 'required|exists:floors,id',
-        //       'building_name.*' => 'required|string',
-        //       'floor_name.*' => 'required|string',
-        //       'appartment_name.*' => 'required|string',
-        //       'location.*' => 'required|string',
-        //   ]);
-  
-          // Retrieve the validated data
-          $buildingId = $request->input('building_id');
-          $floorId = $request->input('floor_id');
-        //   $buildingNames = $request->input('building_name');
-        //   $floorNames = $request->input('floor_name');
-          $appartmentNames = $request->input('appartment_name');
-          $locations = $request->input('location');
-  
-          // Loop through the apartment data and store it
-          foreach ($buildingNames as $index => $buildingName) {
-              $appartment = new Appartment();
-              $appartment->building_id = $buildingId;
-              $appartment->floor_id = $floorId;
-              $appartment->building_name = $buildingName;
-              $appartment->floor_name = $floorNames[$index];
-              $appartment->appartment_name = $appartmentNames[$index];
-              $appartment->location = $locations[$index];
-              $appartment->save();
-          }
-  
-          // Redirect back with a success message
-          return redirect()->route('appartment.index')->with('success', 'Appartments added successfully!');
-      }
-  
-  
+        // Retrieve the validated input data
+        $buildingId = $request->input('building_id');
+        $floorIds = $request->input('floor_id', []);
+        $appartmentNames = $request->input('appartment_name', []);
 
+        // Log the retrieved data
+        Log::info('Building ID:', [$buildingId]);
+        Log::info('Floor IDs:', $floorIds);
+        Log::info('Appartment Names:', $appartmentNames);
 
+        // Ensure that the arrays are not empty and have matching lengths
+        if (count($floorIds) !== count($appartmentNames)) {
+            return redirect()->back()->withErrors(['msg' => 'Mismatch between floor IDs and appartment names.'])->withInput();
+        }
+
+        // Iterate through the arrays and save the data
+        foreach ($floorIds as $index => $floorId) {
+            $appartment = new Appartment();
+            $appartment->building_id = $buildingId;
+            $appartment->floor_id = $floorId;
+            $appartment->appartment_name = $appartmentNames[$index];
+            $appartment->created_date = date('Y-m-d');
+            $appartment->created_by = Auth::guard('admin')->user()->id;
+
+            // Log the appartment data before saving
+            Log::info('Appartment Data:', $appartment->toArray());
+
+            try {
+                $appartment->save();
+            } catch (\Exception $e) {
+                Log::error('Error saving appartment:', ['error' => $e->getMessage()]);
+                return redirect()->back()->withErrors(['msg' => 'Failed to save appartment. Please try again.'])->withInput();
+            }
+        }
+
+        return redirect()->route('appartment.index')->with('success', 'Appartments added successfully.');
+    }
 
     public function edit($id)
     {
@@ -101,9 +126,7 @@ class AppartmentController extends Controller
     public function update(Request $request)
     {
         $data = Appartment::where('id', $request->id)->first();
-        $data['building_id'] = $request->building_id;
         $data['appartment_name'] = $request->appartment_name;
-        $data['location'] = $request->location;
         $data['status'] = $request->status;
         $data->save();
 

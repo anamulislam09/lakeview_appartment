@@ -84,16 +84,15 @@
                                                         <th>Building</th>
                                                         <th>Floor</th>
                                                         <th>Appartment Name</th>
-                                                        <th>Location</th>
                                                         <th>Add</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody id="rent-table-body">
                                                     <tr class="rent-row">
-                                                        <td><input type="text" name="building_name[]" readonly></td>
-                                                        <td><input type="text" name="floor_name[]" readonly></td>
-                                                        <td><input type="text" name="appartment_name[]"></td>
-                                                        <td><input type="text" name="location[]"></td>
+                                                        <td><input type="text" style="border: #f3f2f2" name="building_name[]" readonly></td>
+                                                        <td><input type="text" style="border: #f3f2f2" name="floor_name[]" readonly></td>
+                                                        <input type="hidden" name="floor_id[]">
+                                                        <td><input type="text" name="appartment_name[]" required></td>
                                                         <td>
                                                             <button type="button" class="btn btn-success btn-add text">Add</button>
                                                         </td>
@@ -154,11 +153,16 @@
         });
 
         $(document).on('click', '.btn-add', function() {
+            var lastRow = $('.rent-row').last();
+            var buildingName = lastRow.find('input[name="building_name[]"]').val();
+            var floorName = lastRow.find('input[name="floor_name[]"]').val();
+            var floorId = lastRow.find('input[name="floor_id[]"]').val();
+
             var newRow = `<tr class="rent-row">
-                <td><input type="text" name="building_name[]" readonly></td>
-                <td><input type="text" name="floor_name[]" readonly></td>
+                <td><input type="text" name="building_name[]" value="${buildingName}" readonly></td>
+                <td><input type="text" name="floor_name[]" value="${floorName}" readonly></td>
+                <input type="hidden" name="floor_id[]" value="${floorId}">
                 <td><input type="text" name="appartment_name[]"></td>
-                <td><input type="text" name="location[]"></td>
                 <td>
                     <button type="button" class="btn btn-danger btn-remove text"><i class="fas fa-trash"></i></button>
                 </td>

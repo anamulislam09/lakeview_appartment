@@ -16,8 +16,8 @@ return new class extends Migration
         Schema::create('appartments', function (Blueprint $table) {
             $table->id();
             $table->tinyInteger('building_id')->nullable();
+            $table->tinyInteger('floor_id')->nullable();
             $table->string('appartment_name');
-            $table->string('location')->nullable();
             $table->enum('status',[1, 0])->default(1);
             $table->string('booking_status')->default(0);
             $table->string('created_date');

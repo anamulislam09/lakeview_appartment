@@ -115,7 +115,7 @@
                                         <form action="{{ route('member.store') }}" method="POST">
                                             @csrf
                                             <div class="row">
-                                                <div class="col-lg-4 col-md-4 col-sm-6">
+                                                <div class="col-lg-6 col-md-6 col-sm-6">
                                                     <div class="form-group text form">
                                                         <label for="" class="text">Member Name </label>
                                                         <input type="text" name="member_name"
@@ -123,7 +123,7 @@
                                                             placeholder="Member name" required>
                                                     </div>
                                                 </div>
-                                                <div class="col-lg-4 col-md-4 col-sm-6">
+                                                <div class="col-lg-6 col-md-6 col-sm-6">
                                                     <div class="form-group text form">
                                                         <label for="" class="text">Guardian Name </label>
                                                         <input type="text" name="guardian_name"
@@ -131,7 +131,9 @@
                                                             placeholder="Enter guardian name" required>
                                                     </div>
                                                 </div>
-                                                <div class="col-lg-4 col-md-4 col-sm-6">
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-lg-6 col-md-6 col-sm-6">
                                                     <div class="form-group text form">
                                                         <label for="" class="text">Mother Name</label>
                                                         <input type="text" name="mother_name"
@@ -139,9 +141,7 @@
                                                             placeholder="Enter mother name" required>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-lg-4 col-md-4 col-sm-6">
+                                                <div class="col-lg-6 col-md-6 col-sm-6">
                                                     <div class="form-group text form">
                                                         <label for="" class="text">Permanent Address </label>
                                                         <input type="text" name="permanent_address"
@@ -149,7 +149,9 @@
                                                             placeholder="Enter permanent address" required>
                                                     </div>
                                                 </div>
-                                                <div class="col-lg-4 col-md-4 col-sm-6">
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-lg-6 col-md-6 col-sm-6">
                                                     <div class="form-group text form">
                                                         <label for="" class="text">Nationality</label>
                                                         <select name="nationality" id="" class="form-control"
@@ -160,7 +162,7 @@
                                                         </select>
                                                     </div>
                                                 </div>
-                                                <div class="col-lg-4 col-md-4 col-sm-6">
+                                                <div class="col-lg-6 col-md-6 col-sm-6">
                                                     <div class="form-group text form">
                                                         <label for="" class="text">Religion </label>
                                                         <input type="text" name="religion" value="{{ old('religion') }}"
@@ -170,7 +172,7 @@
                                                 </div>
                                             </div>
                                             <div class="row">
-                                                <div class="col-lg-4 col-md-4 col-sm-6">
+                                                <div class="col-lg-6 col-md-6 col-sm-6">
                                                     <div class="form-group form">
                                                         <label for="" class="text">Date of Dirth</label>
                                                         <input type="date" value="{{ old('date_of_birth') }}"
@@ -178,7 +180,7 @@
                                                             placeholder="Enter date_of_birth" required>
                                                     </div>
                                                 </div>
-                                                <div class="col-lg-4 col-md-4 col-sm-6">
+                                                <div class="col-lg-6 col-md-6 col-sm-6">
                                                     <div class="form-group text form">
                                                         <label for="" class="text">Appartment </label>
                                                         <select name="appartment_id" id=""
@@ -192,7 +194,9 @@
                                                         </select>
                                                     </div>
                                                 </div>
-                                                <div class="col-lg-4 col-md-4 col-sm-6">
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-lg-6 col-md-6 col-sm-6">
                                                     <div class="form-group text form">
                                                         <label for="" class="text">Intercome No</label>
                                                         <input type="text" name="intercome_no"
@@ -200,9 +204,7 @@
                                                             placeholder="Enter intercome_no">
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-lg-3 col-md-3 col-sm-6">
+                                                <div class="col-lg-6 col-md-6 col-sm-6">
                                                     <div class="form-group text form">
                                                         <label for="" class="text">land_phone </label>
                                                         <input type="text" name="land_phone"
@@ -210,7 +212,9 @@
                                                             placeholder="Land Phone">
                                                     </div>
                                                 </div>
-                                                <div class="col-lg-3 col-md-3 col-sm-6">
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-lg-6 col-md-6 col-sm-6">
                                                     <div class="form-group text form">
                                                         <label for="" class="text">Mobile_phone</label>
                                                         <input type="text"name="mobile_phone"
@@ -218,7 +222,7 @@
                                                             placeholder="Valid Phone number" required>
                                                     </div>
                                                 </div>
-                                                <div class="col-lg-3 col-md-3 col-sm-6">
+                                                <div class="col-lg-6 col-md-6 col-sm-6">
                                                     <div class="form-group text form">
                                                         <label for="" class="text">Email </label>
                                                         <input type="text" name="email" value="{{ old('email') }}"
@@ -226,7 +230,9 @@
                                                             required>
                                                     </div>
                                                 </div>
-                                                <div class="col-lg-3 col-md-3 col-sm-6">
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-lg-6 col-md-6 col-sm-6">
                                                     <div class="form-group text form">
                                                         <label for="" class="text">NID/NRC </label>
                                                         <input type="text" name="nid_no" value="{{ old('nid_no') }}"
@@ -234,17 +240,16 @@
                                                             required>
                                                     </div>
                                                 </div>
-
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-lg-4 col-md-4 col-sm-6">
+                                                <div class="col-lg-6 col-md-6 col-sm-6">
                                                     <div class="form-group text form">
                                                         <label for="" class="text">Car no</label>
                                                         <input type="text" name="car_no" value="{{ old('car_no') }}"
                                                             class="form-control text" placeholder="Enter car_no">
                                                     </div>
                                                 </div>
-                                                <div class="col-lg-4 col-md-4 col-sm-6">
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-lg-6 col-md-6 col-sm-6">
                                                     <div class="form-group text form">
                                                         <label for="" class="text">Garage no</label>
                                                         <input type="text" name="garage_no"
@@ -252,7 +257,7 @@
                                                             placeholder="Enter garage_no">
                                                     </div>
                                                 </div>
-                                                <div class="col-lg-4 col-md-4 col-sm-6">
+                                                <div class="col-lg-6 col-md-6 col-sm-6">
                                                     <div class="form-group form">
                                                         <label for="" class="text">Occupation</label>
                                                         <input type="text" name="occupation"
@@ -260,9 +265,10 @@
                                                             placeholder="Enter occupation">
                                                     </div>
                                                 </div>
-                                            </div>
+                                                </div>
+                                                
                                             <div class="row">
-                                                <div class="col-lg-4 col-md-4 col-sm-6">
+                                                <div class="col-lg-6 col-md-6 col-sm-6">
                                                     <div class="form-group text form">
                                                         <label for="" class="text">Designation</label>
                                                         <input type="text" name="designation"
@@ -270,7 +276,7 @@
                                                             placeholder="Enter designation">
                                                     </div>
                                                 </div>
-                                                <div class="col-lg-4 col-md-4 col-sm-6">
+                                                <div class="col-lg-6 col-md-6 col-sm-6">
                                                     <div class="form-group text form">
                                                         <label for="" class="text">Institute Name</label>
                                                         <input type="text" name="institute_name"
@@ -278,7 +284,9 @@
                                                             placeholder="Enter institute name">
                                                     </div>
                                                 </div>
-                                                <div class="col-lg-4 col-md-4 col-sm-6">
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-lg-6 col-md-6 col-sm-6">
                                                     <div class="form-group form">
                                                         <label for="" class="text">Institute Addres</label>
                                                         <input type="text" name="institute_addres"
@@ -287,9 +295,7 @@
                                                             placeholder="Enter institute addres">
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-lg-4 col-md-4 col-sm-6">
+                                                <div class="col-lg-6 col-md-6 col-sm-6">
                                                     <div class="form-group text">
                                                         <label for="nid" class="text">NID/NRC <span
                                                                 style="font-size:12px; color:#fb5200;">(Image)</span></label>
@@ -300,28 +306,29 @@
                                                         @enderror
                                                     </div>
                                                 </div>
-
-                                                <div class="col-lg-4 col-md-4 col-sm-6">
-                                                    <div class="form-group text">
-                                                        <label for="image" class="text">Member Image</label>
-                                                        <input type="file" name="image" class="form-control dropify"
-                                                            data-height="100">
-                                                        @error('image')
-                                                            <span class="text-danger">{{ $message }}</span>
-                                                        @enderror
-                                                    </div>
+                                            </div>
+                                            <div class="row">
+                                            <div class="col-lg-6 col-md-6 col-sm-6">
+                                                <div class="form-group text">
+                                                    <label for="image" class="text">Member Image</label>
+                                                    <input type="file" name="image" class="form-control dropify"
+                                                        data-height="100">
+                                                    @error('image')
+                                                        <span class="text-danger">{{ $message }}</span>
+                                                    @enderror
                                                 </div>
-                                                <div class="col-lg-4 col-md-4 col-sm-6">
-                                                    <div class="form-group text">
-                                                        <label for="flat_reg_document" class="text">Flat Reg
-                                                            Document</label>
-                                                        <input type="file" name="flat_reg_document"
-                                                            class="form-control dropify" data-height="100">
-                                                        @error('flat_reg_document')
-                                                            <span class="text-danger">{{ $message }}</span>
-                                                        @enderror
-                                                    </div>
+                                            </div>
+                                            <div class="col-lg-6 col-md-6 col-sm-6">
+                                                <div class="form-group text">
+                                                    <label for="flat_reg_document" class="text">Flat Reg
+                                                        Document</label>
+                                                    <input type="file" name="flat_reg_document"
+                                                        class="form-control dropify" data-height="100">
+                                                    @error('flat_reg_document')
+                                                        <span class="text-danger">{{ $message }}</span>
+                                                    @enderror
                                                 </div>
+                                            </div>
                                             </div>
                                             <input type="submit" class="btn btn-primary" value="Submit">
                                         </form>

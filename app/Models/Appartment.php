@@ -11,8 +11,8 @@ class Appartment extends Model
     protected $fillable =
     [
         'building_id',
+        'floor_id',
         'appartment_name',
-        'location',
         'status',
         'booking_status',
         'created_date',

@@ -154,7 +154,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Edit Appartment </h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Edit Member </h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -171,8 +171,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Dropify/0.2.2/js/dropify.js"></script>
     <script>
         $('body').on('click', '.edit', function() {
-            let appartment_id = $(this).data('id');
-            $.get("/admin/appartment/edit/" + appartment_id, function(data) {
+            let member_id = $(this).data('id');
+            $.get("/admin/member/edit/" + member_id, function(data) {
                 $('#modal_body').html(data);
 
             })

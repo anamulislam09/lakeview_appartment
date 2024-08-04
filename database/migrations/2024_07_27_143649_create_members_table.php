@@ -37,8 +37,8 @@ return new class extends Migration
             $table->string('occupation')->nullable();
             $table->string('institute_name')->nullable();
             $table->string('designation')->nullable();
-            $table->string('institute_addres')->nullable();
-            $table->string('family_member_name');
+            $table->string('institute_address')->nullable();
+            $table->string('family_member_name')->nullable();
             $table->string('family_member_occupation')->nullable();
             $table->string('family_member_age')->nullable();
             $table->string('family_member_relation')->nullable();

@@ -64,7 +64,7 @@
                             <li class="list-group-item"><strong>garage_no:</strong> {{ $data->garage_no }}</li>
                             <li class="list-group-item"><strong>occupation:</strong> {{ $data->occupation }}</li>
                             <li class="list-group-item"><strong>institute_name:</strong> {{ $data->institute_name }}</li>
-                            <li class="list-group-item"><strong>institute_addres:</strong> {{ $data->institute_addres }}</li>
+                            <li class="list-group-item"><strong>institute_address:</strong> {{ $data->institute_address }}</li>
                         </ul>
                     </div>
                 </div>

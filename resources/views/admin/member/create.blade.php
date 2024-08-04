@@ -104,7 +104,7 @@
                         <div class="card">
                             <div class="card-header bg-primary p-1">
                                 <h3 class="card-title">
-                                    <a href="{{ route('appartment.index') }}"class="btn btn-light shadow rounded m-0"><span>All
+                                    <a href="{{ route('member.index') }}"class="btn btn-light shadow rounded m-0"><span>All
                                             Members</span></a>
                                 </h3>
                             </div>
@@ -112,7 +112,7 @@
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col-12 p-5 m-auto" style="border: 1px solid #ddd;">
-                                        <form action="{{ route('member.store') }}" method="POST">
+                                        <form action="{{ route('member.store') }}" method="POST" enctype="multipart/form-data">
                                             @csrf
                                             <div class="row">
                                                 <div class="col-lg-6 col-md-6 col-sm-6">
@@ -172,7 +172,7 @@
                                                 </div>
                                             </div>
                                             <div class="row">
-                                                <div class="col-lg-6 col-md-6 col-sm-6">
+                                                <div class="col-lg-4 col-md-4 col-sm-6">
                                                     <div class="form-group form">
                                                         <label for="" class="text">Date of Dirth</label>
                                                         <input type="date" value="{{ old('date_of_birth') }}"
@@ -180,17 +180,31 @@
                                                             placeholder="Enter date_of_birth" required>
                                                     </div>
                                                 </div>
-                                                <div class="col-lg-6 col-md-6 col-sm-6">
+                                                <div class="col-lg-4 col-md-4 col-sm-6">
+                                                    <div class="form-group text form">
+                                                        <label for="" class="text">Choose Building</label>
+                                                        <select name="building_id" id="building_id" class="form-control"
+                                                            required>
+                                                            <option value="" selected disabled>Select Building
+                                                            </option>
+                                                            @foreach ($buildings as $building)
+                                                                <option value="{{ $building->id }}">
+                                                                    {{ $building->building_name }}</option>
+                                                            @endforeach
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-4 col-md-4 col-sm-6">
                                                     <div class="form-group text form">
                                                         <label for="" class="text">Appartment </label>
-                                                        <select name="appartment_id" id=""
+                                                        <select name="appartment_id" id="appartment_id"
                                                             class="form-control text" required>
                                                             <option value="" selected disabled>Select Apportment
                                                             </option>
-                                                            @foreach ($appartments as $appartment)
+                                                            {{-- @foreach ($appartments as $appartment)
                                                                 <option value="{{ $appartment->id }}">
                                                                     {{ $appartment->appartment_name }}</option>
-                                                            @endforeach
+                                                            @endforeach --}}
                                                         </select>
                                                     </div>
                                                 </div>
@@ -265,8 +279,8 @@
                                                             placeholder="Enter occupation">
                                                     </div>
                                                 </div>
-                                                </div>
-                                                
+                                            </div>
+
                                             <div class="row">
                                                 <div class="col-lg-6 col-md-6 col-sm-6">
                                                     <div class="form-group text form">
@@ -289,10 +303,10 @@
                                                 <div class="col-lg-6 col-md-6 col-sm-6">
                                                     <div class="form-group form">
                                                         <label for="" class="text">Institute Addres</label>
-                                                        <input type="text" name="institute_addres"
-                                                            value="{{ old('institute_addres') }}"
+                                                        <input type="text" name="institute_address"
+                                                            value="{{ old('institute_address') }}"
                                                             class="form-control text"
-                                                            placeholder="Enter institute addres">
+                                                            placeholder="Enter institute address">
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-6 col-md-6 col-sm-6">
@@ -308,27 +322,77 @@
                                                 </div>
                                             </div>
                                             <div class="row">
-                                            <div class="col-lg-6 col-md-6 col-sm-6">
-                                                <div class="form-group text">
-                                                    <label for="image" class="text">Member Image</label>
-                                                    <input type="file" name="image" class="form-control dropify"
-                                                        data-height="100">
-                                                    @error('image')
-                                                        <span class="text-danger">{{ $message }}</span>
-                                                    @enderror
+                                                <div class="col-lg-6 col-md-6 col-sm-6">
+                                                    <div class="form-group text">
+                                                        <label for="image" class="text">Member Image</label>
+                                                        <input type="file" name="image" class="form-control dropify"
+                                                            data-height="100">
+                                                        @error('image')
+                                                            <span class="text-danger">{{ $message }}</span>
+                                                        @enderror
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6 col-md-6 col-sm-6">
+                                                    <div class="form-group text">
+                                                        <label for="flat_reg_document" class="text">Flat Reg
+                                                            Document</label>
+                                                        <input type="file" name="flat_reg_document"
+                                                            class="form-control dropify" data-height="100">
+                                                        @error('flat_reg_document')
+                                                            <span class="text-danger">{{ $message }}</span>
+                                                        @enderror
+                                                    </div>
                                                 </div>
                                             </div>
-                                            <div class="col-lg-6 col-md-6 col-sm-6">
-                                                <div class="form-group text">
-                                                    <label for="flat_reg_document" class="text">Flat Reg
-                                                        Document</label>
-                                                    <input type="file" name="flat_reg_document"
-                                                        class="form-control dropify" data-height="100">
-                                                    @error('flat_reg_document')
-                                                        <span class="text-danger">{{ $message }}</span>
-                                                    @enderror
+                                            <div class="row">
+                                                <div class="col-lg-6 col-md-6 col-sm-6">
+                                                    <div class="form-group text">
+                                                        <label for="image" class="text">Family Member Name</label>
+                                                        <input type="text" name="family_member_name"
+                                                            value="{{ old('family_member_name') }}" class="form-control"
+                                                            placeholder="Enter Family Member Name">
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6 col-md-6 col-sm-6">
+                                                    <div class="form-group text">
+                                                        <label for="family_member_occupation" class="text">Family Member
+                                                            Occupation</label>
+                                                        <input type="text"
+                                                            value="{{ old('family_member_occupation') }}"
+                                                            name="family_member_occupation" class="form-control"
+                                                            placeholder="Enter occupation">
+                                                    </div>
                                                 </div>
                                             </div>
+                                            <div class="row">
+                                                <div class="col-lg-4 col-md-4 col-sm-6">
+                                                    <div class="form-group text">
+                                                        <label for="image" class="text">Family Member Age</label>
+                                                        <input type="text" value="{{ old('family_member_age') }}"
+                                                            name="family_member_age" class="form-control"
+                                                            placeholder="Enter Family Member Age">
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-4 col-md-4 col-sm-6">
+                                                    <div class="form-group text">
+                                                        <label for="family_member_relation" class="text">Family Member
+                                                            Relation</label>
+                                                        <input type="text" value="{{ old('family_member_relation') }}"
+                                                            name="family_member_relation" class="form-control"
+                                                            placeholder="Enter Relation">
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-4 col-md-4 col-sm-6">
+                                                    <div class="form-group text">
+                                                        <label for="family_member_image" class="text">Family Member
+                                                            Image</label>
+                                                        <input type="file" name="family_member_image"
+                                                            class="form-control dropify" data-height="100">
+                                                            @error('family_member_image')
+                                                            <span class="text-danger">{{ $message }}</span>
+                                                        @enderror
+                                                    </div>
+                                                </div>
                                             </div>
                                             <input type="submit" class="btn btn-primary" value="Submit">
                                         </form>
@@ -341,4 +405,22 @@
             </div>
         </section>
     </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+    <script>
+        $('#building_id').change(function() {
+            var buildingId = $(this).val();
+            $.ajax({
+                url: '/admin/get-appartment/' + buildingId,
+                type: 'GET',
+                success: function(data) {
+                    $('#appartment_id').html(
+                        '<option value="" selected disabled>Select Appartment</option>');
+                    $.each(data, function(index, appartments) {
+                        $('#appartment_id').append('<option value="' + appartments.id + '">' +
+                            appartments.appartment_name + '</option>');
+                    });
+                }
+            });
+        });
+    </script>
 @endsection

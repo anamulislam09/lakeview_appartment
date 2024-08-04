@@ -135,7 +135,7 @@
                 {{-- Category menu start here --}}
                 @if (Auth::guard('admin')->user()->type == 'superadmin' || in_array('Members', $privileges))
                     <li
-                        class="nav-item {{ Request::routeIs('member.index') || Request::routeIs('member.create') || Request::routeIs('member.edit') ? 'menu-open' : '' }}">
+                        class="nav-item {{ Request::routeIs('member.index') || Request::routeIs('member.create') || Request::routeIs('member.edit') || Request::routeIs('member.show') ? 'menu-open' : '' }}">
                         <a href="#" class="nav-link {{ request()->is('admin/member/*') ? 'active' : '' }}">
                             <i class="nav-icon fas fa-edit"></i>
                             <p>
@@ -148,7 +148,7 @@
                                     in_array('Members', $privileges))
                                 <li class="nav-item">
                                     <a href="{{ route('member.index') }}"
-                                        class="nav-link {{ Request::routeIs('member.index') || Request::routeIs('member.edit') ? 'active' : '' }}">
+                                        class="nav-link {{ Request::routeIs('member.index') || Request::routeIs('member.edit') || Request::routeIs('member.show') ? 'active' : '' }}">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>All Member</p>
                                     </a>
@@ -168,7 +168,7 @@
                     </li>
                 @endif
                 {{-- Category menu start here --}}
-                @if (Auth::guard('admin')->user()->type == 'superadmin' ||
+                {{-- @if (Auth::guard('admin')->user()->type == 'superadmin' ||
                         in_array('Family Member ', $privileges))
                     <li
                         class="nav-item {{ Request::routeIs('family-member.index') || Request::routeIs('family-member.create') || Request::routeIs('family-member.edit') ? 'menu-open' : '' }}">
@@ -202,7 +202,7 @@
                             @endif
                         </ul>
                     </li>
-                @endif
+                @endif --}}
                 {{-- settings menu start here --}}
                 @if (Auth::guard('admin')->user()->type == 'superadmin' ||
                         (Auth::guard('admin')->user()->office_id == '1' || in_array('Settings', $privileges)))

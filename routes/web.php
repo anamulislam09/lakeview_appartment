@@ -1,4 +1,5 @@
 <?php
+
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -37,7 +38,7 @@ Route::get('/clear', function () {
 Route::view('/', 'admin.auth.login');
 Route::prefix('admin')->namespace('App\Http\Controllers\admin')->group(function () {
 
-    // Route::match(['get', 'post'], 'login', [AdminController::class, 'login']);
+    Route::match(['get', 'post'], 'login', [AdminController::class, 'login']);
 
     Route::post('login', [AdminController::class, 'login']);
     Route::middleware('admin')->group(function () {
@@ -67,6 +68,8 @@ Route::prefix('admin')->namespace('App\Http\Controllers\admin')->group(function 
         Route::get('/member/show/{id}', [MemberController::class, 'show'])->name('member.show');
         Route::get('/member/create', [MemberController::class, 'create'])->name('member.create');
         Route::get('/get-appartment/{buildingId}', [MemberController::class, 'getAppartment']);
+        Route::get('/filter-members', [MemberController::class, 'filterMembers']);
+
         Route::post('/member/store', [MemberController::class, 'store'])->name('member.store');
         Route::get('/member/edit/{id}', [MemberController::class, 'edit'])->name('member.edit');
         Route::post('/member/update', [MemberController::class, 'update'])->name('member.update');

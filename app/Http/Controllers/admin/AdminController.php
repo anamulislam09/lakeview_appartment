@@ -8,7 +8,6 @@ use App\Models\Role;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Building;
-use App\Models\Office;
 use Auth;
 use Hash;
 
@@ -82,8 +81,6 @@ class AdminController extends Controller
         }else{
             $adminType = Role::find(Auth::guard('admin')->user()->type)->role;
         }
-
-
 
         return view('admin.settings.update-details',compact('adminType'));
     }

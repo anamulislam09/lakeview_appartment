@@ -98,6 +98,24 @@
                         </div>
                     </div>
                 </div>
+                <hr>
+                <h3 class="mt-2">Family Member Info</h3>
+                <ul class="list-group">
+                    <li class="list-group-item"><strong>Name:</strong> {{ $data->family_member_name }}</li>
+                    <li class="list-group-item"><strong>Occupation:</strong> {{ $data->family_member_occupation }}</li>
+                    <li class="list-group-item"><strong>Age:</strong> {{ $data->family_member_age }}</li>
+                    <li class="list-group-item"><strong>Relation:</strong> {{ $data->family_member_relation }}</li>
+                </ul>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="card mt-3">
+                            <div class="card-body">
+                                <h5 class="card-title"> Image</h5>
+                                <img src="{{ asset($data->family_member_image) }}" class="document-img" alt="family_member_image " data-toggle="modal" data-target="#imageModal" data-image="{{ asset($data->family_member_image) }}" data-name="data Photo">
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
     </div>

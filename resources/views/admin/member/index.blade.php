@@ -2,7 +2,6 @@
 
 @section('content')
     <style>
-
         @media screen and (max-width: 767px) {
 
             div.dataTables_wrapper div.dataTables_length,
@@ -33,7 +32,6 @@
             .card-header {
                 padding: .25rem 1.25rem;
             }
-
         }
 
         a.disabled {
@@ -80,12 +78,29 @@
                         <div class="card">
                             <div class="card-header bg-primary p-1">
                                 <h3 class="card-title">
-                                    <a href="{{ route('member.create') }}"class="btn btn-light shadow rounded m-0"><i
-                                            class="fas fa-plus"></i><span>Add New</span></a>
+                                    <a href="{{ route('member.create') }}" class="btn btn-light shadow rounded m-0">
+                                        <i class="fas fa-plus"></i><span>Add New</span>
+                                    </a>
                                 </h3>
                             </div>
-                            <!-- /.card-header -->
                             <div class="card-body">
+                                <div class="row">
+                                    <div class="col-lg-3 col-md-3 col-sm-12">
+                                        <label for="building_id">Building</label>
+                                        <select name="building_id" id="building_id" class="form-control">
+                                            <option value="0" selected>All Building</option>
+                                            @foreach ($buildings as $building)
+                                                <option value="{{ $building->id }}">{{ $building->building_name }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    <div class="col-lg-3 col-md-3 col-sm-12 form">
+                                        <label for="appartment_id" class="text">Appartment</label>
+                                        <select name="appartment_id" id="appartment_id" class="form-control text" required>
+                                            <option value="0" selected>All Appartment</option>
+                                        </select>
+                                    </div>
+                                </div>
                                 <div class="table-responsive">
                                     <table id="example1" class="table table-bordered table-striped">
                                         <thead>
@@ -94,13 +109,13 @@
                                                 <th>Member Name</th>
                                                 <th>Phone</th>
                                                 <th>Email</th>
-                                                <th>Appartment Name</th>
+                                                <th>appartment Name</th>
                                                 <th>Created By</th>
                                                 <th>Status</th>
-                                                <th> Action</th>
+                                                <th>Action</th>
                                             </tr>
                                         </thead>
-                                        <tbody>
+                                        <tbody id="memberTable">
                                             @foreach ($data as $key => $item)
                                                 @php
                                                     $auth_name = App\Models\Admin::where(
@@ -129,11 +144,17 @@
                                                     <td>
                                                         <a href="" class="btn btn-sm btn-info edit"
                                                             data-id="{{ $item->id }}" data-toggle="modal"
-                                                            data-target="#editUser"><i class="fas fa-edit"></i></a>
+                                                            data-target="#editUser">
+                                                            <i class="fas fa-edit"></i>
+                                                        </a>
                                                         <a href="{{ route('member.show', $item->id) }}"
-                                                            class="btn btn-sm btn-success"><i class="fas fa-eye"></i></a>
+                                                            class="btn btn-sm btn-success">
+                                                            <i class="fas fa-eye"></i>
+                                                        </a>
                                                         <a href="{{ route('appartment.destroy', $item->id) }}"
-                                                            class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></a>
+                                                            class="btn btn-sm btn-danger">
+                                                            <i class="fas fa-trash"></i>
+                                                        </a>
                                                     </td>
                                                 </tr>
                                             @endforeach
@@ -154,14 +175,12 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Edit Member </h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Edit Member</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <div id="modal_body">
-
-                </div>
+                <div id="modal_body"></div>
             </div>
         </div>
     </div>
@@ -174,8 +193,77 @@
             let member_id = $(this).data('id');
             $.get("/admin/member/edit/" + member_id, function(data) {
                 $('#modal_body').html(data);
+            });
+        });
 
-            })
-        })
+        $('#building_id').change(function() {
+            var buildingId = $(this).val();
+            $.ajax({
+                url: '/admin/get-appartment/' + buildingId,
+                type: 'GET',
+                success: function(data) {
+                    $('#appartment_id').html(
+                        '<option value="0" selected>All Appartment</option>');
+                    $.each(data.appartments, function(index, appartment) {
+                        $('#appartment_id').append('<option value="' + appartment.id + '">' +
+                            appartment.appartment_name + '</option>');
+                    });
+
+                    // Update the member table based on building
+                    filterMembers(buildingId, null);
+                }
+            });
+        });
+
+        $('#appartment_id').change(function() {
+            var buildingId = $('#building_id').val();
+            var appartmentId = $(this).val();
+            filterMembers(buildingId, appartmentId);
+        });
+
+        function filterMembers(buildingId, appartmentId) {
+            $.ajax({
+                url: '/admin/filter-members',
+                type: 'GET',
+                data: {
+                    building_id: buildingId,
+                    appartment_id: appartmentId
+                },
+                success: function(data) {
+                    $('#memberTable').html('');
+                    if (data.members.length > 0) {
+                        $.each(data.members, function(index, member) {
+                            var auth_name = member.auth_name ? member.auth_name : 'N/A';
+                            var appartment_name = member.appartment_name ? member.appartment_name :
+                                'N/A';
+                            var status = member.status == 1 ?
+                                '<span class="badge badge-success">Active</span>' :
+                                '<span class="badge badge-danger">Inactive</span>';
+                            var row = '<tr>' +
+                                '<td>' + (index + 1) + '</td>' +
+                                '<td>' + member.member_name + '</td>' +
+                                '<td>' + member.mobile_phone + '</td>' +
+                                '<td>' + member.email + '</td>' +
+                                '<td>' + appartment_name + '</td>' +
+                                '<td>' + auth_name + '</td>' +
+                                '<th>' + status + '</th>' +
+                                '<td>' +
+                                '<a href="" class="btn btn-sm btn-info edit" data-id="' + member.id +
+                                '" data-toggle="modal" data-target="#editUser"><i class="fas fa-edit"></i></a>' +
+                                '<a href="/admin/member/show/' + member.id +
+                                '" class="btn btn-sm btn-success"><i class="fas fa-eye"></i></a>' +
+                                '<a href="/admin/appartment/destroy/' + member.id +
+                                '" class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></a>' +
+                                '</td>' +
+                                '</tr>';
+                            $('#memberTable').append(row);
+                        });
+                    } else {
+                        $('#memberTable').html(
+                            '<tr><td colspan="8" class="text-center">Data Not Found</td></tr>');
+                    }
+                }
+            });
+        }
     </script>
 @endsection

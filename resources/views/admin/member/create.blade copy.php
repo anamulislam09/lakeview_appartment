@@ -118,15 +118,22 @@
                                             <div class="row">
                                                 <div class="col-lg-6 col-md-6 col-sm-6">
                                                     <div class="form-group text form">
-                                                        <label for="" class="text">Member Name </label>
-                                                        <input type="text" name="member_name"
-                                                            value="{{ old('member_name') }}" class="form-control text"
-                                                            placeholder="Member name" required>
+                                                        <div class="row">
+                                                            <div class="col-lg-4 col-md-4">
+                                                                <label for="" class="text">Member Name </label>
+                                                            </div>
+                                                            <div class="col-lg-8 col-md-8">
+                                                                <input type="text" name="member_name"
+                                                                    value="{{ old('member_name') }}"
+                                                                    class="form-control text" placeholder="Member name"
+                                                                    required>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-6 col-md-6 col-sm-6">
-                                                    <div class="form-group text form">
-                                                        <label for="" class="text">Guardian Name </label>
+                                                    <div class="form-inline text form">
+                                                        <label for="" class="text">Guardian Name :</label>
                                                         <input type="text" name="guardian_name"
                                                             value="{{ old('guardian_name') }}" class="form-control text"
                                                             placeholder="Enter guardian name" required>

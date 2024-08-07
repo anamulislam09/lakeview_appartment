@@ -1,6 +1,6 @@
 <div class="card">
     <div class="card-body p-5">
-        <form action="{{ route('member.store') }}" method="POST" enctype="multipart/form-data">
+        <form action="{{ route('member.update') }}" method="POST" enctype="multipart/form-data">
             @csrf
             <input type="hidden" name="id" value="{{$data->id}}">
             <div class="row">
@@ -65,7 +65,7 @@
                 <div class="col-lg-4 col-md-4 col-sm-6">
                     <div class="form-group text form">
                         <label for="" class="text"> Building</label>
-                        <input type="text" value="{{ $building }}" class="form-control text" readonly>
+                        <input type="text" value="{{ $building }}" name="building_id" class="form-control text" readonly>
                         {{-- <select name="building_id" id="building_id" class="form-control" required>
                             <option value="" selected disabled>Select Building
                             </option>
@@ -79,7 +79,7 @@
                 <div class="col-lg-4 col-md-4 col-sm-6">
                     <div class="form-group text form">
                         <label for="" class="text">Appartment </label>
-                        <input type="text" value="{{ $appartment }}" class="form-control text" readonly>
+                        <input type="text" value="{{ $appartment }}" name="appartment_id" class="form-control text" readonly>
                         {{-- <select name="appartment_id" id="appartment_id"
                             class="form-control text" required>
                             <option value="" selected disabled>Select Apportment

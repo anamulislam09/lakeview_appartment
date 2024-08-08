@@ -275,6 +275,7 @@
                 <input type="password" placeholder="Password" name="password" required>
                 <button type="submit">Sign In</button>
             </form>
+            
         </div>
     </div>
 </body>

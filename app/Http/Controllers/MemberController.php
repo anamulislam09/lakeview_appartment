@@ -153,7 +153,7 @@ class MemberController extends Controller
             $familyMemberFile = $request->file('family_member_image');
             $familyMemberFileFileName = time() . '_family_member_image.' . $familyMemberFile->getClientOriginalExtension();
             $familyMemberFile->move(public_path('family_member_document/family_member_image'), $familyMemberFileFileName);
-            $data['family_member_image'] = 'member_document/family_member_image/' . $familyMemberFileFileName;
+            $data['family_member_image'] = 'family_member_document/family_member_image/' . $familyMemberFileFileName;
         }
         $member = Member::create($data);
         if ($member) {
@@ -257,6 +257,24 @@ class MemberController extends Controller
             $flatRegDocFile->move(public_path('member_document/flat_reg_document'), $flatRegDocFileName);
             $data->flat_reg_document = 'member_document/flat_reg_document/' . $flatRegDocFileName;
         }
+
+        // family member document 
+        $data['family_member_name'] = $request->family_member_name;
+        $data['family_member_occupation'] = $request->family_member_occupation;
+        $data['family_member_age'] = $request->family_member_age;
+        $data['family_member_relation'] = $request->family_member_relation;
+
+
+        if ($request->hasFile('family_member_image')) {
+            if ($data->family_member_image && file_exists(public_path($data->family_member_image))) {
+                unlink(public_path($data->family_member_image));
+            }
+            $family_member_image = $request->file('family_member_image');
+            $family_member_imageName = time() . '_family_member_image.' . $family_member_image->getClientOriginalExtension();
+            $family_member_image->move(public_path('family_member_document/family_member_image'), $family_member_imageName);
+            $data->family_member_image = 'family_member_document/family_member_image/' . $family_member_imageName;
+        }
+
         $data->save();
 
         // Redirect back with success message
@@ -268,6 +286,6 @@ class MemberController extends Controller
     {
         $data = Member::findOrFail($id);
         $data->delete();
-        return redirect()->route('building.index')->with('alert', ['messageType' => 'danger', 'message' => 'Building Deleted Successfully!']);
+        return redirect()->route('member.index')->with('alert', ['messageType' => 'danger', 'message' => 'Building Deleted Successfully!']);
     }
 }

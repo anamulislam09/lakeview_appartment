@@ -38,7 +38,7 @@ Route::get('/clear', function () {
 Route::view('/', 'admin.auth.login');
 Route::prefix('admin')->namespace('App\Http\Controllers\admin')->group(function () {
 
-    Route::match(['get', 'post'], 'login', [AdminController::class, 'login']);
+    // Route::match(['get', 'post'], 'login', [AdminController::class, 'login']);
 
     Route::post('login', [AdminController::class, 'login']);
     Route::middleware('admin')->group(function () {

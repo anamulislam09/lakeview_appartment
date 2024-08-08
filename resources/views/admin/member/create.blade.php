@@ -345,55 +345,88 @@
                                                     </div>
                                                 </div>
                                             </div>
+                                            <div class="py-2">
+                                                <h5 style="border-bottom: 1px solid #ddd; font-weight:bold"
+                                                    class="text-center pb-2">Family Member Info</h5>
+                                            </div>
                                             <div class="row">
-                                                <div class="col-lg-6 col-md-6 col-sm-6">
+                                                <div class="col-lg-5 col-md-5 col-sm-5">
                                                     <div class="form-group text">
-                                                        <label for="image" class="text">Family Member Name</label>
+                                                        <label for="image" class="text">Family Member
+                                                            Name</label>
                                                         <input type="text" name="family_member_name"
+                                                            id="family_member_name"
                                                             value="{{ old('family_member_name') }}" class="form-control"
                                                             placeholder="Enter Family Member Name">
                                                     </div>
                                                 </div>
-                                                <div class="col-lg-6 col-md-6 col-sm-6">
+                                                <div class="col-lg-5 col-md-5 col-sm-5">
                                                     <div class="form-group text">
                                                         <label for="family_member_occupation" class="text">Family Member
                                                             Occupation</label>
-                                                        <input type="text"
+                                                        <input type="text" id="family_member_occupation"
                                                             value="{{ old('family_member_occupation') }}"
                                                             name="family_member_occupation" class="form-control"
                                                             placeholder="Enter occupation">
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-2 col-md-2 col-sm-2">
+                                                    <div class="form-group text mt-10">
+                                                        {{-- <button class="btn btn-success" id="add">Add</button> --}}
+                                                        <button type="button"
+                                                            class="btn btn-success add_family_member">Add</button>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="row">
                                                 <div class="col-lg-4 col-md-4 col-sm-6">
                                                     <div class="form-group text">
-                                                        <label for="image" class="text">Family Member Age</label>
+                                                        <label for="image" class="text">Family Member
+                                                            Age</label>
                                                         <input type="text" value="{{ old('family_member_age') }}"
-                                                            name="family_member_age" class="form-control"
-                                                            placeholder="Enter Family Member Age">
+                                                            name="family_member_age[]" id="family_member_age"
+                                                            class="form-control" placeholder="Enter Family Member Age">
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-4 col-md-4 col-sm-6">
                                                     <div class="form-group text">
-                                                        <label for="family_member_relation" class="text">Family Member
+                                                        <label for="family_member_relation" class="text">Family
+                                                            Member
                                                             Relation</label>
                                                         <input type="text" value="{{ old('family_member_relation') }}"
-                                                            name="family_member_relation" class="form-control"
-                                                            placeholder="Enter Relation">
+                                                            name="family_member_relation[]" id="family_member_relation"
+                                                            class="form-control" placeholder="Enter Relation">
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-4 col-md-4 col-sm-6">
                                                     <div class="form-group text">
-                                                        <label for="family_member_image" class="text">Family Member
+                                                        <label for="family_member_image" class="text">Family
+                                                            Member
                                                             Image</label>
-                                                        <input type="file" name="family_member_image"
-                                                            class="form-control dropify" data-height="100">
+                                                        <input type="file" name="family_member_image[]"
+                                                            class="form-control dropify" id="family_member_image"
+                                                            data-height="100">
                                                         @error('family_member_image')
                                                             <span class="text-danger">{{ $message }}</span>
                                                         @enderror
                                                     </div>
                                                 </div>
+                                            </div>
+                                            <div class="table-responsive" id="ftable">
+                                                <table class="table table-bordered table-striped">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Name</th>
+                                                            <th>Occupation</th>
+                                                            <th>Age</th>
+                                                            <th>Relation</th>
+                                                            <th>Image</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody id="familyMemberTable">
+                                                        <!-- Family members will be added here -->
+                                                    </tbody>
+                                                </table>
                                             </div>
                                             <input type="submit" class="btn btn-primary" value="Submit">
                                         </form>
@@ -406,8 +439,37 @@
             </div>
         </section>
     </div>
+    <!-- Template for new family member fields -->
+    {{-- <div class="table-responsive">
+
+    </div>
+    <table class="table table-bordered table-striped">
+       <thead>
+        <tr>
+            <th>Name</th>
+            <th>Occupation</th>
+            <th>Age</th>
+            <th>Relation</th>
+            <th>Image</th>
+        </tr>
+       </thead>
+       <tbody id="falimyMemberTable">
+        <tr>
+            <td id="family_member_name"></td>
+            <td id="family_member_occupation"></td>
+            <td id="family_member_age"></td>
+            <td id="family_member_relation"></td>
+            <td id="family_member_image"></td>
+        </tr>
+       </tbody>
+    </table> --}}
+
+    <!-- Family members table -->
+
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
-    <script>
+    {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/Dropify/0.2.2/js/dropify.js"></script> --}}
+    {{-- <script>
         $('#building_id').change(function() {
             var buildingId = $(this).val();
             $.ajax({
@@ -420,10 +482,72 @@
                         $('#appartment_id').append('<option value="' + appartment.id + '">' +
                             appartment.appartment_name + '</option>');
                     });
-
                 }
             });
         });
-        appartments
+    </script> --}}
+
+    <script>
+        $(document).ready(function() {
+    $('#ftable').hide();
+
+    $('.add_family_member').click(function() {
+        
+        var name = $('#family_member_name').val();
+        var occupation = $('#family_member_occupation').val();
+        var age = $('#family_member_age').val();
+        var relation = $('#family_member_relation').val();
+        var image = $('#family_member_image').prop('files')[0];
+
+        if (name && occupation && age && relation) {
+            $('#ftable').show();
+
+            // Use ternary operator to handle image presence
+            var imgTag = image 
+                ? `<img src="${URL.createObjectURL(image)}" width="50" height="50" />` 
+                : 'No Image';
+
+            $('#familyMemberTable').append(`
+                <tr>
+                    <td>${name}</td>
+                    <td>${occupation}</td>
+                    <td>${age}</td>
+                    <td>${relation}</td>
+                    <td>${imgTag}</td>
+                </tr>
+            `);
+
+            // Clear input fields
+            $('#family_member_name').val('');
+            $('#family_member_occupation').val('');
+            $('#family_member_age').val('');
+            $('#family_member_relation').val('');
+            $('#family_member_image').val('');
+
+            // Reset the specific Dropify instance
+            // var drEvent = $('#family_member_image').dropify();
+            // drEvent = drEvent.data('dropify');
+            // drEvent.resetPreview();
+            // drEvent.clearElement();
+        }
+    });
+});
+
+
+        $('#building_id').change(function() {
+            var buildingId = $(this).val();
+            $.ajax({
+                url: '/admin/get-appartment/' + buildingId,
+                type: 'GET',
+                success: function(data) {
+                    $('#appartment_id').html(
+                        '<option value="" selected disabled>Select Appartment</option>');
+                    $.each(data.appartments, function(index, appartment) {
+                        $('#appartment_id').append('<option value="' + appartment.id + '">' +
+                            appartment.appartment_name + '</option>');
+                    });
+                }
+            });
+        });
     </script>
 @endsection

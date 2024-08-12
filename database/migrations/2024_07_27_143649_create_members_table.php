@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->tinyInteger('appartment_id')->nullable();
             $table->tinyInteger('building_id')->nullable();
+            $table->tinyInteger('floor_id')->nullable();
             $table->string('member_name')->nullable();
             $table->string('guardian_name')->nullable();
             $table->string('mother_name')->nullable();

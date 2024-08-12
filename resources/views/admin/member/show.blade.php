@@ -68,7 +68,7 @@
                         </ul>
                     </div>
                 </div>
-                <h3 class="mt-2">All Documents</h3>
+                <h3 class="mt-2 text-center">All Documents</h3>
                 <hr>
                 <div class="row">
                     <div class="col-md-6">
@@ -99,23 +99,36 @@
                     </div>
                 </div>
                 <hr>
-                <h3 class="mt-2">Family Member Info</h3>
-                <ul class="list-group">
-                    <li class="list-group-item"><strong>Name:</strong> {{ $data->family_member_name }}</li>
-                    <li class="list-group-item"><strong>Occupation:</strong> {{ $data->family_member_occupation }}</li>
-                    <li class="list-group-item"><strong>Age:</strong> {{ $data->family_member_age }}</li>
-                    <li class="list-group-item"><strong>Relation:</strong> {{ $data->family_member_relation }}</li>
-                </ul>
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="card mt-3">
-                            <div class="card-body">
-                                <h5 class="card-title"> Image</h5>
-                                <img src="{{ asset($data->family_member_image) }}" class="document-img" alt="family_member_image " data-toggle="modal" data-target="#imageModal" data-image="{{ asset($data->family_member_image) }}" data-name="data Photo">
-                            </div>
-                        </div>
-                    </div>
+                <h3 class="mt-2 text-center">Family Member Info</h3>
+                <div class="table-responsive" id="ftable">
+                    <table class="table table-bordered table-striped">
+                        <thead>
+                            <tr>
+                                <th>SL.</th>
+                                <th>Name</th>
+                                <th>Occupation</th>
+                                <th>Age</th>
+                                <th>Relation</th>
+                                <th>Image</th>
+                            </tr>
+                        </thead>
+                        <tbody id="familyMemberTable">
+                           @foreach ($fmembers as $key => $fmember)
+                               <tr>
+                                <td>{{$key+1}}</td>
+                                <td>{{ $fmember->family_member_name }}</td>
+                                <td>{{ $fmember->family_member_occupation }}</td>
+                                <td>{{ $fmember->family_member_age }}</td>
+                                <td>{{ $fmember->family_member_relation }}</td>
+                                <td>
+                                    <img src="{{ asset($fmember->family_member_image) }}" class="document-img" alt="family_member_image " data-toggle="modal" data-target="#imageModal" data-image="{{ asset($data->family_member_image) }}" data-name="data Photo">
+                                </td>
+                               </tr>
+                           @endforeach
+                        </tbody>
+                    </table>
                 </div>
+
             </div>
         </section>
     </div>

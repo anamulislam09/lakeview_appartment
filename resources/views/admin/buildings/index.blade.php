@@ -17,6 +17,7 @@
     </style>
 
     <div class="content-wrapper">
+        @include('layouts.admin.flash-message')
         <div class="container-fluid">
             <div class="row">
                 <div class="col-sm-6">

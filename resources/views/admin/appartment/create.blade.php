@@ -40,6 +40,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Dropify/0.2.2/css/dropify.css" />
 <div class="content-wrapper">
     <!-- Main content -->
+    @include('layouts.admin.flash-message')
     <section class="content mt-3">
         <div class="container-fluid">
             <div class="row">

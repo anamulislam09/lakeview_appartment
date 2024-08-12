@@ -35,43 +35,6 @@ class AppartmentController extends Controller
         return response()->json($floors);
     }
 
-    // public function store(Request $request)
-    // {
-    //     // Log the request data
-    //     Log::info('Request Data:', $request->all());
-
-    //     // Retrieve the validated input data
-    //     $buildingId = $request->input('building_id');
-    //     $floorIds = $request->input('floor_id', []);
-    //     $appartmentNames = $request->input('appartment_name', []);
-
-    //     // Log the retrieved data
-    //     Log::info('Building ID:', [$buildingId]);
-    //     Log::info('Floor IDs:', $floorIds);
-    //     Log::info('Appartment Names:', $appartmentNames);
-
-    //     // Ensure that the arrays are not empty
-    //     if (!is_array($floorIds) || !is_array($appartmentNames)) {
-    //         return redirect()->back()->withErrors(['msg' => 'Invalid input data. Please try again.']);
-    //     }
-
-    //     // Iterate through the arrays and save the data
-    //     foreach ($floorIds as $index => $floorId) {
-    //         $appartment = new Appartment();
-    //         $appartment->building_id = $buildingId;
-    //         $appartment->floor_id = $floorId;
-    //         $appartment->appartment_name = $appartmentNames[$index];
-    //         $appartment->created_date = date('Y-m-d');
-    //         $appartment->created_by = Auth::guard('admin')->user()->id;
-
-    //         // Log the appartment data before saving
-    //         Log::info('Appartment Data:', $appartment->toArray());
-
-    //         $appartment->save();
-    //     }
-
-    //     return redirect()->route('appartment.index')->with('success', 'Appartments added successfully.');
-    // }
 
     public function store(Request $request)
     {
@@ -113,7 +76,7 @@ class AppartmentController extends Controller
             }
         }
 
-        return redirect()->route('appartment.index')->with('success', 'Appartments added successfully.');
+        return redirect()->route('appartment.index')->with('alert',['messageType'=>'success','message'=>'Appartments added successfully.!']);
     }
 
     public function edit($id)

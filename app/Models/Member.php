@@ -12,6 +12,7 @@ class Member extends Model
     [
         'appartment_id',
         'building_id',
+        'floor_id',
         'member_name',
         'guardian_name',
         'mother_name',

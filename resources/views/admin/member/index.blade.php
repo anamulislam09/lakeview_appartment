@@ -2,57 +2,18 @@
 
 @section('content')
     <style>
-        @media screen and (max-width: 767px) {
+        /* Existing Styles */
 
-            div.dataTables_wrapper div.dataTables_length,
-            div.dataTables_wrapper div.dataTables_filter,
-            div.dataTables_wrapper div.dataTables_info,
-            div.dataTables_wrapper div.dataTables_paginate {
-                text-align: right !important;
-            }
-
-            .card-title a {
-                font-size: 15px;
-            }
-
-            .text {
-                font-size: 10px !important;
-            }
-
-            table,
-            thead,
-            tbody,
-            tr,
-            td,
-            th {
-                font-size: 13px !important;
-                padding: 10px !important;
-            }
-
-            .card-header {
-                padding: .25rem 1.25rem;
-            }
+        .hidden {
+            display: none;
         }
 
-        a.disabled {
-            pointer-events: none;
-            cursor: default;
+        @media screen and (max-width: 767px) {
+            /* Mobile Styles */
         }
 
         .modal-dialog {
-            max-width: 650px;
-        }
-
-        .table td,
-        .table th {
-            padding: .20rem;
-            vertical-align: top;
-            border-top: 1px solid #dee2e6;
-            font-size: 14px;
-        }
-
-        .text {
-            font-size: 14px
+            max-width: 900px;
         }
     </style>
 
@@ -70,8 +31,10 @@
                 </div>
             </div>
         </div>
+
         <!-- Main content -->
         <section class="content mt-3">
+            @include('layouts.admin.flash-message')
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-12">
@@ -95,69 +58,40 @@
                                         </select>
                                     </div>
                                     <div class="col-lg-3 col-md-3 col-sm-12 form">
+                                        <label for="floor_id" class="text">Floor</label>
+                                        <select name="floor_id" id="floor_id" class="form-control text" required>
+                                            <option value="0" selected>All Floor</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-lg-3 col-md-3 col-sm-12 form">
                                         <label for="appartment_id" class="text">Appartment</label>
                                         <select name="appartment_id" id="appartment_id" class="form-control text" required>
                                             <option value="0" selected>All Appartment</option>
                                         </select>
                                     </div>
+                                    <div class="col-lg-3 col-md-3 col-sm-12 form">
+                                        <label for="search" class="text"></label>
+                                        <input type="search" class="form-control text mt-2" name="search" id="search"
+                                            placeholder="Search here">
+                                    </div>
                                 </div>
-                                <div class="table-responsive">
-                                    <table id="example1" class="table table-bordered table-striped">
+
+                                <div class="table-responsive hidden" id="membersTableContainer">
+                                    <table id="membersTable" class="table table-bordered table-striped">
                                         <thead>
                                             <tr>
                                                 <th>SL</th>
                                                 <th>Member Name</th>
                                                 <th>Phone</th>
                                                 <th>Email</th>
-                                                <th>appartment Name</th>
+                                                <th>Apartment Name</th>
                                                 <th>Created By</th>
                                                 <th>Status</th>
                                                 <th>Action</th>
                                             </tr>
                                         </thead>
                                         <tbody id="memberTable">
-                                            @foreach ($data as $key => $item)
-                                                @php
-                                                    $auth_name = App\Models\Admin::where(
-                                                        'id',
-                                                        $item->created_by,
-                                                    )->value('name');
-                                                    $appartment_name = App\Models\Appartment::where(
-                                                        'id',
-                                                        $item->appartment_id,
-                                                    )->value('appartment_name');
-                                                @endphp
-                                                <tr>
-                                                    <td>{{ $key + 1 }}</td>
-                                                    <td>{{ $item->member_name }}</td>
-                                                    <td>{{ $item->mobile_phone }}</td>
-                                                    <td>{{ $item->email }}</td>
-                                                    <td>{{ $appartment_name }}</td>
-                                                    <td>{{ $auth_name }}</td>
-                                                    <th>
-                                                        @if ($item->status == 1)
-                                                            <span class="badge badge-success">Active</span>
-                                                        @else
-                                                            <span class="badge badge-danger">Inactive</span>
-                                                        @endif
-                                                    </th>
-                                                    <td>
-                                                        <a href="" class="btn btn-sm btn-info edit"
-                                                            data-id="{{ $item->id }}" data-toggle="modal"
-                                                            data-target="#editUser">
-                                                            <i class="fas fa-edit"></i>
-                                                        </a>
-                                                        <a href="{{ route('member.show', $item->id) }}"
-                                                            class="btn btn-sm btn-success">
-                                                            <i class="fas fa-eye"></i>
-                                                        </a>
-                                                        <a href="{{ route('appartment.destroy', $item->id) }}"
-                                                            class="btn btn-sm btn-danger">
-                                                            <i class="fas fa-trash"></i>
-                                                        </a>
-                                                    </td>
-                                                </tr>
-                                            @endforeach
+                                            <!-- Dynamic Rows Will Be Appended Here -->
                                         </tbody>
                                     </table>
                                 </div>
@@ -196,74 +130,159 @@
             });
         });
 
-        $('#building_id').change(function() {
-            var buildingId = $(this).val();
-            $.ajax({
-                url: '/admin/get-appartment/' + buildingId,
-                type: 'GET',
-                success: function(data) {
-                    $('#appartment_id').html(
-                        '<option value="0" selected>All Appartment</option>');
-                    $.each(data.appartments, function(index, appartment) {
-                        $('#appartment_id').append('<option value="' + appartment.id + '">' +
-                            appartment.appartment_name + '</option>');
+        $(document).ready(function() {
+            let lastSearchResults = []; // To store the last search or filter results
+
+            // Hide the table by default
+            $('#membersTableContainer').hide();
+
+            $('#search').on('input', function() {
+                var query = $(this).val();
+                var buildingId = $('#building_id').val();
+                var floorId = $('#floor_id').val();
+                var appartmentId = $('#appartment_id').val();
+
+                if (query) {
+                    filterMembers(buildingId, floorId, appartmentId,
+                    query); // Perform search based on input
+                } else {
+                    // If search is empty, filter by building, floor, and apartment
+                    filterMembers(buildingId, floorId, appartmentId, ''); // Pass an empty query
+                }
+            });
+
+            $('#building_id, #floor_id, #appartment_id').on('change', function() {
+                var query = $('#search').val(); // Get the current search query
+                var buildingId = $('#building_id').val();
+                var floorId = $('#floor_id').val();
+                var appartmentId = $('#appartment_id').val();
+
+                if (query) {
+                    filterMembers(buildingId, floorId, appartmentId,
+                    query); // Perform search if query exists
+                } else {
+                    filterMembers(buildingId, floorId, appartmentId,
+                    ''); // Filter based on building, floor, and apartment
+                }
+            });
+
+            function displayMembers(members) {
+                $('#memberTable').html(''); // Clear the table
+                if (members.length > 0) {
+                    $('#membersTableContainer').show();
+                    $.each(members, function(index, member) {
+                        var auth_name = member.auth_name ? member.auth_name : 'N/A';
+                        var appartment_name = member.appartment_name ? member.appartment_name : 'N/A';
+                        var status = member.status == 1 ?
+                            '<span class="badge badge-success">Active</span>' :
+                            '<span class="badge badge-danger">Inactive</span>';
+                        var row = '<tr>' +
+                            '<td>' + (index + 1) + '</td>' +
+                            '<td>' + member.member_name + '</td>' +
+                            '<td>' + member.mobile_phone + '</td>' +
+                            '<td>' + member.email + '</td>' +
+                            '<td>' + appartment_name + '</td>' +
+                            '<td>' + auth_name + '</td>' +
+                            '<th>' + status + '</th>' +
+                            '<td>' +
+                            '<a href="" class="btn btn-sm btn-info edit" data-id="' +
+                            member.id +
+                            '" data-toggle="modal" data-target="#editUser"><i class="fas fa-edit"></i></a>' +
+                            '<a href="/admin/member/show/' + member.id +
+                            '" class="btn btn-sm btn-success"><i class="fas fa-eye"></i></a>' +
+                            '<a href="/admin/appartment/destroy/' + member.id +
+                            '" class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></a>' +
+                            '</td>' +
+                            '</tr>';
+                        $('#memberTable').append(row);
                     });
-
-                    // Update the member table based on building
-                    filterMembers(buildingId, null);
+                } else {
+                    $('#memberTable').html('<tr><td colspan="8" class="text-center">No Data Found</td></tr>');
                 }
-            });
-        });
+            }
 
-        $('#appartment_id').change(function() {
-            var buildingId = $('#building_id').val();
-            var appartmentId = $(this).val();
-            filterMembers(buildingId, appartmentId);
-        });
-
-        function filterMembers(buildingId, appartmentId) {
-            $.ajax({
-                url: '/admin/filter-members',
-                type: 'GET',
-                data: {
-                    building_id: buildingId,
-                    appartment_id: appartmentId
-                },
-                success: function(data) {
-                    $('#memberTable').html('');
-                    if (data.members.length > 0) {
-                        $.each(data.members, function(index, member) {
-                            var auth_name = member.auth_name ? member.auth_name : 'N/A';
-                            var appartment_name = member.appartment_name ? member.appartment_name :
-                                'N/A';
-                            var status = member.status == 1 ?
-                                '<span class="badge badge-success">Active</span>' :
-                                '<span class="badge badge-danger">Inactive</span>';
-                            var row = '<tr>' +
-                                '<td>' + (index + 1) + '</td>' +
-                                '<td>' + member.member_name + '</td>' +
-                                '<td>' + member.mobile_phone + '</td>' +
-                                '<td>' + member.email + '</td>' +
-                                '<td>' + appartment_name + '</td>' +
-                                '<td>' + auth_name + '</td>' +
-                                '<th>' + status + '</th>' +
-                                '<td>' +
-                                '<a href="" class="btn btn-sm btn-info edit" data-id="' + member.id +
-                                '" data-toggle="modal" data-target="#editUser"><i class="fas fa-edit"></i></a>' +
-                                '<a href="/admin/member/show/' + member.id +
-                                '" class="btn btn-sm btn-success"><i class="fas fa-eye"></i></a>' +
-                                '<a href="/admin/appartment/destroy/' + member.id +
-                                '" class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></a>' +
-                                '</td>' +
-                                '</tr>';
-                            $('#memberTable').append(row);
-                        });
-                    } else {
-                        $('#memberTable').html(
-                            '<tr><td colspan="8" class="text-center">Data Not Found</td></tr>');
+            function filterMembers(buildingId, floorId = '', appartmentId = '', query = '') {
+                $.ajax({
+                    url: '/admin/filter-members',
+                    type: 'GET',
+                    data: {
+                        building_id: buildingId,
+                        floor_id: floorId,
+                        appartment_id: appartmentId,
+                        search: query // Pass the search query to the server
+                    },
+                    success: function(data) {
+                        lastSearchResults = data.members; // Store the last search results
+                        displayMembers(lastSearchResults);
+                    },
+                    error: function() {
+                        console.error('Error filtering members');
                     }
-                }
+                });
+            }
+
+            // Building selection handler
+            $('#building_id').change(function() {
+                var buildingId = $(this).val();
+                fetchFloors(buildingId);
+                filterMembers(buildingId, null, null);
             });
-        }
+
+            // Floor selection handler
+            $('#floor_id').change(function() {
+                var buildingId = $('#building_id').val();
+                var floorId = $(this).val();
+                fetchApartments(floorId);
+                filterMembers(buildingId, floorId, null);
+            });
+            // Apartment selection handler
+            $('#appartment_id').change(function() {
+                var buildingId = $('#building_id').val();
+                var floorId = $('#floor_id').val();
+                var appartmentId = $(this).val();
+                filterMembers(buildingId, floorId, appartmentId);
+            });
+
+            function fetchFloors(buildingId) {
+                $.ajax({
+                    url: '/admin/get-floors/' + buildingId,
+                    type: 'GET',
+                    success: function(data) {
+                        // Clear the floor dropdown
+                        $('#floor_id').html('<option value="0" selected>All Floor</option>');
+
+                        // Populate the floor dropdown with data
+                        $.each(data, function(index, floor) {
+                            $('#floor_id').append('<option value="' + floor.id + '">' + floor
+                                .building_floor + '</option>');
+                        });
+
+                        // Optionally, trigger the change event to auto-update the apartments
+                        $('#floor_id').change();
+                    }
+                });
+            }
+
+            function fetchApartments(floorId) {
+
+                $.ajax({
+                    url: '/admin/get-appartment/' + floorId, // Ensure this matches your route
+                    type: 'GET',
+                    success: function(data) {
+
+                        // Clear and populate the apartment dropdown
+                        $('#appartment_id').html('<option value="0" selected>All Apartment</option>');
+                        $.each(data, function(index, appartment) {
+                            $('#appartment_id').append('<option value="' + appartment.id +
+                                '">' +
+                                appartment.appartment_name + '</option>');
+                        });
+                    },
+                    error: function(xhr, status, error) {
+                        console.error('Error fetching apartments:', error);
+                    }
+                });
+            }
+        });
     </script>
 @endsection

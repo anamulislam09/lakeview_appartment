@@ -61,13 +61,16 @@ Route::prefix('admin')->namespace('App\Http\Controllers\admin')->group(function 
         Route::get('/appartment/delete/{id}', [AppartmentController::class, 'destroy'])->name('appartment.destroy');
 
         // Route::get('/get-floor/{building_id}', [AppartmentController::class, 'getFloor']);  // get appartment using ajax
-        Route::get('/get-floors/{buildingId}', [AppartmentController::class, 'getFloor']);
+        
 
         //------------members route ------------>
         Route::get('/member/all', [MemberController::class, 'index'])->name('member.index');
         Route::get('/member/show/{id}', [MemberController::class, 'show'])->name('member.show');
         Route::get('/member/create', [MemberController::class, 'create'])->name('member.create');
-        Route::get('/get-appartment/{buildingId}', [MemberController::class, 'getAppartment']);
+        Route::get('/get-appartments/{buildingId}', [MemberController::class, 'getAppartments']);
+        Route::get('/get-floors/{buildingId}', [AppartmentController::class, 'getFloor']);
+        Route::get('/get-appartment/{floorId}', [MemberController::class, 'getAppartment']);
+        // Route::get('/get-apartment/{floorId}', [MemberController::class, 'getAppartments']);
         Route::get('/filter-members', [MemberController::class, 'filterMembers']);
 
         Route::post('/member/store', [MemberController::class, 'store'])->name('member.store');

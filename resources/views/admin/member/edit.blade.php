@@ -105,7 +105,7 @@
                 </div>
                 <div class="col-lg-6 col-md-6 col-sm-6">
                     <div class="form-group text form">
-                        <label for="" class="text">Intercome No</label>
+                        <label for="" class="text">Intercom No</label>
                         <input type="text" name="intercome_no" value="{{ $data->intercome_no }}"
                             class="form-control text" placeholder="Enter intercome_no">
                     </div>
@@ -252,11 +252,13 @@
                     Info</h5>
             </div>
             @foreach ($fmembers as $fmember)
+            <input type="hidden" name="member_id[]" value="{{ $fmember->member_id }}">
+            <input type="hidden" name="family_member_id[]" value="{{ $fmember->id }}">
                 <div class="row">
                     <div class="col-lg-2 col-md- col-sm-6">
                         <div class="form-group text">
                             <label for="image" class="text">Name</label>
-                            <input type="text" name="family_member_name"
+                            <input type="text" name="family_member_name[]"
                                 value="{{ $fmember->family_member_name }}" class="form-control">
                         </div>
                     </div>
@@ -264,13 +266,13 @@
                         <div class="form-group text">
                             <label for="family_member_occupation" class="text"> Occupation</label>
                             <input type="text" value="{{ $fmember->family_member_occupation }}"
-                                name="family_member_occupation" class="form-control">
+                                name="family_member_occupation[]" class="form-control">
                         </div>
                     </div>
                     <div class="col-lg-2 col-md-2 col-sm-6">
                         <div class="form-group text">
                             <label for="image" class="text">Age</label>
-                            <input type="text" value="{{ $fmember->family_member_age }}" name="family_member_age"
+                            <input type="text" value="{{ $fmember->family_member_age }}" name="family_member_age[]"
                                 class="form-control">
                         </div>
                     </div>
@@ -278,7 +280,7 @@
                         <div class="form-group text">
                             <label for="family_member_relation" class="text">Relation</label>
                             <input type="text" value="{{ $fmember->family_member_relation }}"
-                                name="family_member_relation" class="form-control">
+                                name="family_member_relation[]" class="form-control">
                         </div>
                     </div>
                     <div class="col-lg-4 col-md-4 col-sm-6">
@@ -286,7 +288,7 @@
                             <div class="col-lg-8 col-md-8 col-sm-6"">
                                 <div class="form-group text">
                                     <label for="family_member_image" class="text">Image</label>
-                                    <input type="file" name="family_member_image" class="form-control dropify"
+                                    <input type="file" name="family_member_image[]" class="form-control dropify"
                                         data-height="100">
                                     @error('family_member_image')
                                         <span class="text-danger">{{ $message }}</span>

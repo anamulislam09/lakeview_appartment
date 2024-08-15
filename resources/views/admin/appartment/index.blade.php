@@ -65,6 +65,7 @@
                                                 <th>Floor No</th>
                                                 <th>Appartment Name</th>
                                                 <th>Created By</th>
+                                                <th>Booking Status</th>
                                                 <th>Status</th>
                                                 <th> Action</th>
                                             </tr>
@@ -87,6 +88,13 @@
                                                     <td>Floor {{ $building_floor }}</td>
                                                     <td>{{ $item->appartment_name }}</td>
                                                     <td>{{ $auth_name }}</td>
+                                                    <th>
+                                                        @if ($item->booking_status == 1)
+                                                            <span class="badge badge-warning">Booked</span>
+                                                        @else
+                                                            <span class="badge badge-success">Available</span>
+                                                        @endif
+                                                    </th>
                                                     <th>
                                                         @if ($item->status == 1)
                                                             <span class="badge badge-success">Active</span>

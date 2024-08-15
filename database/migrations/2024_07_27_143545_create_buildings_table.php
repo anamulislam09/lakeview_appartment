@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('building_name');
             $table->string('building_location');
             $table->string('building_floor');
-            $table->enum('status',[1, 0])->default(1);
+            $table->tinyInteger('status')->default(1);
             $table->string('created_date');
             $table->string('created_by');
             $table->timestamps();

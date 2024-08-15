@@ -44,7 +44,7 @@ return new class extends Migration
             $table->string('family_member_age')->nullable();
             $table->string('family_member_relation')->nullable();
             $table->string('family_member_image')->nullable();
-            $table->enum('status',[1, 0])->default(1);
+            $table->tinyInteger('status')->default(1);
             $table->string('created_date');
             $table->string('created_by');
             $table->timestamps();

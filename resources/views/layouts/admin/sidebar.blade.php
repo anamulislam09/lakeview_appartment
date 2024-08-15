@@ -144,8 +144,7 @@
                             </p>
                         </a>
                         <ul class="nav nav-treeview">
-                            @if (Auth::guard('admin')->user()->type == 'superadmin' ||
-                                    in_array('Members', $privileges))
+                            @if (Auth::guard('admin')->user()->type == 'superadmin' || in_array('Members', $privileges))
                                 <li class="nav-item">
                                     <a href="{{ route('member.index') }}"
                                         class="nav-link {{ Request::routeIs('member.index') || Request::routeIs('member.edit') || Request::routeIs('member.show') ? 'active' : '' }}">
@@ -154,8 +153,7 @@
                                     </a>
                                 </li>
                             @endif
-                            @if (Auth::guard('admin')->user()->type == 'superadmin' ||
-                                    in_array('member', $privileges))
+                            @if (Auth::guard('admin')->user()->type == 'superadmin' || in_array('member', $privileges))
                                 <li class="nav-item">
                                     <a href="{{ route('member.create') }}"
                                         class="nav-link {{ Request::routeIs('member.create') ? 'active' : '' }}">
@@ -168,8 +166,7 @@
                     </li>
                 @endif
                 {{-- Category menu start here --}}
-                {{-- @if (Auth::guard('admin')->user()->type == 'superadmin' ||
-                        in_array('Family Member ', $privileges))
+                {{-- @if (Auth::guard('admin')->user()->type == 'superadmin' || in_array('Family Member ', $privileges))
                     <li
                         class="nav-item {{ Request::routeIs('family-member.index') || Request::routeIs('family-member.create') || Request::routeIs('family-member.edit') ? 'menu-open' : '' }}">
                         <a href="#" class="nav-link {{ request()->is('admin/family-member/*') ? 'active' : '' }}">
@@ -180,8 +177,7 @@
                             </p>
                         </a>
                         <ul class="nav nav-treeview">
-                            @if (Auth::guard('admin')->user()->type == 'superadmin' ||
-                                    in_array('family-member', $privileges))
+                            @if (Auth::guard('admin')->user()->type == 'superadmin' || in_array('family-member', $privileges))
                                 <li class="nav-item">
                                     <a href="{{ route('family-member.index') }}"
                                         class="nav-link {{ Request::routeIs('family-member.index') || Request::routeIs('family-member.edit') ? 'active' : '' }}">
@@ -190,8 +186,7 @@
                                     </a>
                                 </li>
                             @endif
-                            @if (Auth::guard('admin')->user()->type == 'superadmin' ||
-                                    in_array('family-member', $privileges))
+                            @if (Auth::guard('admin')->user()->type == 'superadmin' || in_array('family-member', $privileges))
                                 <li class="nav-item">
                                     <a href="{{ route('family-member.create') }}"
                                         class="nav-link {{ Request::routeIs('family-member.create') ? 'active' : '' }}">

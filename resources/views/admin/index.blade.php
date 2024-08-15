@@ -36,26 +36,111 @@
         </div>
         <section class="content">
             <div class="container-fluid">
-                <div class="row">
-                    @if (Auth::guard('admin')->user()->type == 'superadmin' || Auth::guard('admin')->user()->type == '2')
+                @if (Auth::guard('admin')->user()->type == 'superadmin' || Auth::guard('admin')->user()->type == '2')
+                    <div class="row">
                         <div class="col-lg-3 col-6">
                             <div class="small-box bg-danger">
                                 <div class="inner">
-                                   
-                                    <p>Total Office</p>
-                                    <h3 class="text-center"></h3>
+
+                                    <p>Total Building</p>
+                                    <h3 class="text-center">{{ $building }}</h3>
                                 </div>
                                 <div class="icon">
                                     <i class="ion ion-bag"></i>
                                 </div>
-                                <a href="#" class="small-box-footer">More info <i
+                                <a href="{{route('building.index')}}" class="small-box-footer">More info <i
                                         class="fas fa-arrow-circle-right"></i></a>
                             </div>
                         </div>
-                    @endif
-                  
-                </div>
-                <div class="row">
+                        <div class="col-lg-3 col-6">
+                            <div class="small-box bg-primary">
+                                <div class="inner">
+
+                                    <p>Total Appartment</p>
+                                    <h3 class="text-center">{{ $appartment }}</h3>
+                                </div>
+                                <div class="icon">
+                                    <i class="ion ion-bag"></i>
+                                </div>
+                                <a href="{{route('appartment.index')}}" class="small-box-footer">More info <i
+                                        class="fas fa-arrow-circle-right"></i></a>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-6">
+                            <div class="small-box bg-info">
+                                <div class="inner">
+
+                                    <p> Booked Appartment</p>
+                                    <h3 class="text-center">{{ $bookedAppartment }}</h3>
+                                </div>
+                                <div class="icon">
+                                    <i class="ion ion-bag"></i>
+                                </div>
+                                <a href="{{route('appartment.index')}}" class="small-box-footer">More info <i
+                                        class="fas fa-arrow-circle-right"></i></a>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-6">
+                            <div class="small-box bg-warning">
+                                <div class="inner">
+
+                                    <p>Available Appartment</p>
+                                    <h3 class="text-center">{{ $availableAppartment }}</h3>
+                                </div>
+                                <div class="icon">
+                                    <i class="ion ion-bag"></i>
+                                </div>
+                                <a href="{{route('appartment.index')}}" class="small-box-footer">More info <i
+                                        class="fas fa-arrow-circle-right"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-3 col-6">
+                            <div class="small-box bg-success">
+                                <div class="inner">
+
+                                    <p>Total Members</p>
+                                    <h3 class="text-center">{{ $member }}</h3>
+                                </div>
+                                <div class="icon">
+                                    <i class="ion ion-bag"></i>
+                                </div>
+                                <a href="{{route('member.index')}}" class="small-box-footer">More info <i
+                                        class="fas fa-arrow-circle-right"></i></a>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-6">
+                            <div class="small-box bg-dark">
+                                <div class="inner">
+
+                                    <p>Active Members</p>
+                                    <h3 class="text-center">{{ $activeMember }}</h3>
+                                </div>
+                                <div class="icon">
+                                    <i class="ion ion-bag"></i>
+                                </div>
+                                <a href="{{route('member.index')}}" class="small-box-footer">More info <i
+                                        class="fas fa-arrow-circle-right"></i></a>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-6">
+                            <div class="small-box bg-danger">
+                                <div class="inner">
+
+                                    <p>Inactive Members</p>
+                                    <h3 class="text-center">{{ $deactiveMember }}</h3>
+                                </div>
+                                <div class="icon">
+                                    <i class="ion ion-bag"></i>
+                                </div>
+                                <a href="{{route('member.index')}}" class="small-box-footer">More info <i
+                                        class="fas fa-arrow-circle-right"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                @endif
+                {{-- <div class="row">
                     @if (Auth::guard('admin')->user()->type == 'superadmin' || in_array('Latest Orders', $privileges))
                         <section class="col-lg-7 connectedSortable">
                             <div class="card">
@@ -83,39 +168,7 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                {{-- @foreach ($data['latestOrders'] as $key => $latestOrder)
-                                                    <tr>
-                                                        <td><a target="_blank"
-                                                                href="{{ url('admin/orders/invoice/' . $latestOrder->id) }}">{{ $latestOrder->order_no }}</a>
-                                                        </td>
-                                                        <td>{{ $latestOrder->user->name }}</td>
-                                                        <td>{{ $latestOrder->user->phone }}</td>
-                                                        @php
-                                                            switch ($latestOrder->order_status) {
-                                                                case 'Pending':
-                                                                    $badge = 'warning';
-                                                                    break;
-                                                                case 'Processing':
-                                                                    $badge = 'info';
-                                                                    break;
-                                                                case 'Shipped':
-                                                                    $badge = 'primary';
-                                                                    break;
-                                                                case 'Delivered':
-                                                                    $badge = 'danger';
-                                                                    break;
-                                                                case 'Cancelled':
-                                                                    $badge = 'dark';
-                                                                    break;
-                                                                default:
-                                                                    $badge = 'dark';
-                                                            }
-                                                        @endphp
-                                                        <td><span
-                                                                class="badge badge-{{ $badge }}">{{ $latestOrder->order_status }}</span>
-                                                        </td>
-                                                    </tr>
-                                                @endforeach --}}
+                                               
                                             </tbody>
                                         </table>
                                     </div>
@@ -203,7 +256,7 @@
                             </div>
                         </div>
                     </section>
-                </div>
+                </div> --}}
             </div>
         </section>
     </div>

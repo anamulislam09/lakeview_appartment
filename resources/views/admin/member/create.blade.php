@@ -111,8 +111,9 @@
                             </div>
                             <!-- /.card-header -->
                             <div class="card-body">
+                                <h5 style="border-bottom: 1px solid #ddd; font-weight:bold" class="text-center pb-2">Member Info Form</h5>
                                 <div class="row">
-                                    <div class="col-12 p-5 m-auto" style="border: 1px solid #ddd;">
+                                    <div class="col-12 px-5 m-auto" style="border: 1px solid #ddd;">
                                         <form action="{{ route('member.store') }}" method="POST"
                                             enctype="multipart/form-data">
                                             @csrf
@@ -216,7 +217,7 @@
                                             <div class="row">
                                                 <div class="col-lg-6 col-md-6 col-sm-6">
                                                     <div class="form-group text form">
-                                                        <label for="" class="text">Intercome No</label>
+                                                        <label for="" class="text">Intercom No</label>
                                                         <input type="text" name="intercome_no"
                                                             value="{{ old('intercome_no') }}" class="form-control text"
                                                             placeholder="Enter intercome_no">

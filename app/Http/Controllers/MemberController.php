@@ -74,7 +74,6 @@ class MemberController extends Controller
         return response()->json(['members' => $members]);
     }
 
-
     public function show($id)
     {
         $data = Member::where('id', $id)->first();
@@ -194,7 +193,7 @@ class MemberController extends Controller
                     //     $familyMemberFile->move(public_path('family_member_document/family_member_image'), $familyMemberFileName);
                     //     $familyData['family_member_image'] = 'family_member_document/family_member_image/' . $familyMemberFileName;
                     // }
-                    
+
                     // dd($familyData);
                     FamilyMember::create($familyData);
                 }
@@ -305,32 +304,39 @@ class MemberController extends Controller
             $data->flat_reg_document = 'member_document/flat_reg_document/' . $flatRegDocFileName;
         }
 
-        $data->save();
+        $member = $data->save();
+        if ($request->has('family_member_name')) {
+            foreach ($request->family_member_name as $index => $familyMemberName) {
+                $familyData = FamilyMember::where('id', $request->family_member_id[$index])
+                    ->where('member_id', $request->member_id[$index])
+                    ->first();
 
+                if ($familyData) {
+                    // Handle the file upload
+                    // if ($request->hasFile('family_member_image')) {
+                    //     if ($familyData->family_member_image && file_exists(public_path($familyData->family_member_image))) {
+                    //         unlink(public_path($familyData->family_member_image));
+                    //     }
+                    //     $family_member_image = $request->file('family_member_image');
+                    //     $family_member_imageName = time() . '_family_member_image.' . $family_member_image->getClientOriginalExtension();
+                    //     $family_member_image->move(public_path('family_member_document/family_member_image'), $family_member_imageName);
+                    //     $familyData->family_member_image = 'family_member_document/family_member_image/' . $family_member_imageName;
+                    // }
 
-        // family member document 
-        $data['family_member_name'] = $request->family_member_name;
-        $data['family_member_occupation'] = $request->family_member_occupation;
-        $data['family_member_age'] = $request->family_member_age;
-        $data['family_member_relation'] = $request->family_member_relation;
-
-
-        if ($request->hasFile('family_member_image')) {
-            if ($data->family_member_image && file_exists(public_path($data->family_member_image))) {
-                unlink(public_path($data->family_member_image));
+                    // Update the family member data
+                    $familyData->update([
+                        'family_member_name' => $familyMemberName,
+                        'family_member_occupation' => $request->family_member_occupation[$index] ?? null,
+                        'family_member_age' => $request->family_member_age[$index] ?? null,
+                        'family_member_relation' => $request->family_member_relation[$index] ?? null,
+                    ]);
+                }
             }
-            $family_member_image = $request->file('family_member_image');
-            $family_member_imageName = time() . '_family_member_image.' . $family_member_image->getClientOriginalExtension();
-            $family_member_image->move(public_path('family_member_document/family_member_image'), $family_member_imageName);
-            $data->family_member_image = 'family_member_document/family_member_image/' . $family_member_imageName;
         }
-
-
-
         // Redirect back with success message
-        return redirect()->back()->with('success', 'Member updated successfully!');
+        // return redirect()->back()->with('success', 'Member updated successfully!');
+        return redirect()->route('member.index')->with('alert', ['messageType' => 'success', 'message' => 'Member updated successfully!']);
     }
-
 
     public function destroy($id)
     {

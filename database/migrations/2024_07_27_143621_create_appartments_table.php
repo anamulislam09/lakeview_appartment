@@ -18,8 +18,8 @@ return new class extends Migration
             $table->tinyInteger('building_id')->nullable();
             $table->tinyInteger('floor_id')->nullable();
             $table->string('appartment_name');
-            $table->enum('status',[1, 0])->default(1);
-            $table->string('booking_status')->default(0);
+            $table->tinyInteger('status')->default(1);
+            $table->tinyInteger('booking_status')->default(0);
             $table->string('created_date');
             $table->string('created_by');
             $table->timestamps();

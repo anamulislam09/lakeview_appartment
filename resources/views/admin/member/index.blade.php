@@ -47,7 +47,7 @@
                                 </h3>
                             </div>
                             <div class="card-body">
-                                <div class="row">
+                                <div class="row mb-3">
                                     <div class="col-lg-3 col-md-3 col-sm-12">
                                         <label for="building_id">Building</label>
                                         <select name="building_id" id="building_id" class="form-control">

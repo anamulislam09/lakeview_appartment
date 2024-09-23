@@ -76,7 +76,7 @@
                             </p>
                         </a>
                         <ul class="nav nav-treeview">
-                            @if (Auth::guard('admin')->user()->type == 'superadmin' || in_array('Building Manage, Add', $privileges))
+                            @if (Auth::guard('admin')->user()->type == 'superadmin' || in_array('Building', $privileges))
                                 <li class="nav-item">
                                     <a href="{{ route('building.create') }}"
                                         class="nav-link {{ request()->is('admin/building/create') ? 'active' : '' }}">
@@ -85,7 +85,7 @@
                                     </a>
                                 </li>
                             @endif
-                            @if (Auth::guard('admin')->user()->type == 'superadmin' || in_array('Building Manage, Building', $privileges))
+                            @if (Auth::guard('admin')->user()->type == 'superadmin' || in_array('Building', $privileges))
                                 <li class="nav-item">
                                     <a href="{{ route('building.index') }}"
                                         class="nav-link {{ request()->is('admin/building/all') ? 'active' : '' }}">
